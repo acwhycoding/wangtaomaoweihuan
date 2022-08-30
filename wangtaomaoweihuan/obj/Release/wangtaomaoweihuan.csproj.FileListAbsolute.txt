@@ -1,0 +1,12 @@
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\bin\Release\wangtaomaoweihuan.exe.config
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\bin\Release\wangtaomaoweihuan.exe
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\bin\Release\wangtaomaoweihuan.pdb
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\bin\Release\JHR_GetIcon.dll
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.csproj.AssemblyReference.cache
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.Form1.resources
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.Properties.Resources.resources
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.csproj.GenerateResource.cache
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.csproj.CoreCompileInputs.cache
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.csproj.CopyComplete
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.exe
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Release\wangtaomaoweihuan.pdb
