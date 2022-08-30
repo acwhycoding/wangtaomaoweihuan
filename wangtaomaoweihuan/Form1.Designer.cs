@@ -456,9 +456,9 @@
             this.刷新ToolStripMenuItem,
             this.属性ToolStripMenuItem1});
             this.contextMenu_lv.Name = "contextMenu_lv";
-            this.contextMenu_lv.Size = new System.Drawing.Size(211, 224);
+            this.contextMenu_lv.Size = new System.Drawing.Size(146, 196);
             this.contextMenu_lv.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_lv_Opening);
-            this.contextMenu_lv.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.contextMenu_lv.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // 复制CToolStripMenuItem
             // 
@@ -556,6 +556,7 @@
             this.contextMenu_lv2.Name = "contextMenu_lv2";
             this.contextMenu_lv2.Size = new System.Drawing.Size(109, 124);
             this.contextMenu_lv2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_lv2_Opening);
+            this.contextMenu_lv2.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // 打开ToolStripMenuItem
             // 

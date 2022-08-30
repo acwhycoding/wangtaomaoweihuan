@@ -945,10 +945,7 @@ namespace wangtaomaoweihuan
 
             }
         }
-        private void contextMenu_item_Click(object sender, CancelEventArgs e)
-        {
-
-        }
+      
 
         private void doEmpty()
         {
@@ -1398,6 +1395,33 @@ namespace wangtaomaoweihuan
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             donew("folder");
+        }
+
+        private void contextMenu_item_Click(object sender, EventArgs e)
+        {
+            ToolStripItem tsi = (ToolStripItem)sender;
+            switch (tsi.Name)//根据菜单项的变量名区分单击的菜单项功能
+            {
+                case "item_copy": docopy(); break;//复制
+                case "item_cut": docut(); break;//剪切
+                case "item_paste": dopaste(); break;//粘贴
+                case "item_delete": dodelete(); break;//删除
+                case "item_rename": dorename(); break;//重命名
+                case "item_refresh": combo_url_SelectedIndexChanged(null, null); break; //刷新" +
+                case "item_attr": showattr(listView1.SelectedItems[0].Tag.ToString()); break;//属性
+                case "item_newfolder": donew("folder"); break;//新建文件夹
+                case "item_newword": donew("word"); break;//新建word文档
+                case "item_newtxt": donew("txt"); break;//新建文本文档
+                case "item_newexcel": donew("excel"); break;//新建excel文档
+                case "item_newppt": donew("ppt"); break;//新建演示文稿
+                case "item_open": OpenObj(listView1.SelectedItems[0]); break;//打开文件夹或设备
+                case "item_del": doRecycleDel(); break;//回收站-删除(即彻底删除)
+                case "item_revert": doRevert(); break;//回收站-还原
+                case "item_empty": doEmpty(); break;//回收站-清空
+                case "iten_refresh2": combo_url_SelectedIndexChanged(null, null); break;//刷新
+
+            }
+
         }
     }
 
