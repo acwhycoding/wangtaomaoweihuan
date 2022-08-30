@@ -261,6 +261,6 @@ namespace wangtaomaoweihuan
             }
             lb_objnum.Text = listView1.Items.Count.ToString();
         }
-
     }
+    
 }
