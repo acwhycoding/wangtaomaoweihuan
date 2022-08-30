@@ -169,7 +169,7 @@ namespace wangtaomaoweihuan
                 newitem.SubItems.Add(lvtype);
                 if (driver.IsReady)
                 {
-                    lvtotal = Math.Round(driver.TotalSize / (1024 * 1024 * 1.0), 1).ToString() + "G";
+                    lvtotal = Math.Round(driver.TotalSize / (1024 * 1024 * 1024 * 1.0), 1).ToString() + "G";
                     lvfree = Math.Round(driver.TotalFreeSpace / (1024 * 1024 * 1024 * 1.0), 1).ToString() + "G";
                 }
                 newitem.SubItems.Add(lvtotal);

@@ -60,13 +60,13 @@
             this.lb_ojbnum = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.ch_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_totale = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_avail = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.listView1 = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -329,6 +329,38 @@
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // imageList2
+            // 
+            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList2.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // ch_name
+            // 
+            this.ch_name.Text = "名称";
+            this.ch_name.Width = 98;
+            // 
+            // ch_type
+            // 
+            this.ch_type.Text = "类型";
+            this.ch_type.Width = 338;
+            // 
+            // ch_totale
+            // 
+            this.ch_totale.Text = "总大小";
+            this.ch_totale.Width = 311;
+            // 
+            // ch_avail
+            // 
+            this.ch_avail.Text = "可用空间";
+            this.ch_avail.Width = 77;
+            // 
             // listView1
             // 
             this.listView1.Activation = System.Windows.Forms.ItemActivation.TwoClick;
@@ -353,46 +385,16 @@
             listViewGroup3,
             listViewGroup4});
             this.listView1.HideSelection = false;
+            this.listView1.LargeImageList = this.imageList2;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(858, 358);
+            this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // ch_name
-            // 
-            this.ch_name.Text = "名称";
-            this.ch_name.Width = 98;
-            // 
-            // ch_type
-            // 
-            this.ch_type.Text = "类型";
-            this.ch_type.Width = 338;
-            // 
-            // ch_totale
-            // 
-            this.ch_totale.Text = "总大小";
-            this.ch_totale.Width = 311;
-            // 
-            // ch_avail
-            // 
-            this.ch_avail.Text = "可用空间";
-            this.ch_avail.Width = 77;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // imageList2
-            // 
-            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList2.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // Form1
             // 
@@ -455,13 +457,13 @@
         private System.Windows.Forms.ToolStripStatusLabel lb_ojbnum;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader ch_name;
         private System.Windows.Forms.ColumnHeader ch_type;
         private System.Windows.Forms.ColumnHeader ch_totale;
         private System.Windows.Forms.ColumnHeader ch_avail;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ImageList imageList2;
     }
 }
 
