@@ -1365,9 +1365,9 @@ namespace wangtaomaoweihuan
             {
                 case "桌面":
                     return;
-                case "回收站": combo_url.Text = "桌面"; break;
-                case "我的电脑": combo_url.Text = "桌面"; break;
-                case "收藏夹": combo_url.Text = "桌面"; break;
+                case "回收站": combo_url.Text = "回收站"; break;
+                case "我的电脑": combo_url.Text = "我的电脑"; break;
+                case "收藏夹": combo_url.Text = "收藏夹"; break;
                 default:
                     {
                         try
@@ -1422,6 +1422,14 @@ namespace wangtaomaoweihuan
 
             }
 
+        }
+
+        private void listView1_MouseEnter(object sender, EventArgs e)
+        {
+            string folderpath = combo_url.Text;
+            if(folderpath.Equals("回收站")|| folderpath.Equals("收藏夹") || folderpath.Equals("我的电脑"))
+                listView1.ContextMenuStrip = contextMenu_lv2;
+            else listView1.ContextMenuStrip = contextMenu_lv;
         }
     }
 
