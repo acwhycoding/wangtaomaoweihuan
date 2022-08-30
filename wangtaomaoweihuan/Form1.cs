@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.FileIO;
+using FileSystem = Microsoft.VisualBasic.FileIO.FileSystem;
 
 namespace wangtaomaoweihuan
 {
@@ -21,6 +23,8 @@ namespace wangtaomaoweihuan
         GetIcon getIcon = new GetIcon();
         
         bool flag_pre_next = false;
+        ArrayList copyobj = new ArrayList();
+        bool iscut = false;
         public Form1()
         {
             InitializeComponent();
@@ -849,8 +853,611 @@ namespace wangtaomaoweihuan
 
         private void combo_url_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int flag = 0;
+            string newpath = combo_url.Text.Trim();
+            switch (newpath)
+            {
+                case "桌面":
+                    // 如果不是前进或后退引起的地址变换，则把选中的路径调整到最新位置
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("点面");
+                            accesspaths.Insert(0, "桌面");
+                        }
+
+                        GetDesktopListview(); break;
+                    }
+                case "我的电脑":
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("我的电脑");
+                            accesspaths.Insert(0, "我的电脑");
+                        }
+
+                        GetDriverListview(); break;
+                    }
+
+                case "回收站"://回收站目前不提供还原功能
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("回收站");
+                            accesspaths.Insert(0, "回收站");
+                        }
+
+                        GetRecyleListView(); break;
+                    }
+
+                case "收藏夹":
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("收藏夹");
+                            accesspaths.Insert(0, "收藏夹");
+                        }
+
+                        GetfavoritesListViev(); break;
+                    }
+                default:
+                    {
+                        flag = GetFolderListview(newpath);
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove(newpath);
+                            accesspaths.Insert(0, newpath);
+                        }
+
+                        break;
+                    }
+
+            }
+
+
+            if (flag_pre_next == false)//重新绑定combo_ur1
+            {
+                combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);//**** combo_url.DataSource = null;
+                combo_url.DataSource = accesspaths;
+                combo_url.SelectedIndex = 0;
+                combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);//wr
+            }
+            if (flag == 1)
+            {
+                listView1.Items.Clear();
+                MessageBox.Show("访问失败，缺少权限或设备未就绪", "错误");
+            }
+            flag_pre_next = false;
 
         }
+
+        private void shuaxin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fanhui_Click(object sender, EventArgs e)
+        {
+            string currpath = combo_url.Text;
+
+            switch (currpath)
+            {
+                case "桌面":
+                    return;
+                case "回收站": combo_url.Text = "桌面"; break;
+                case "我的电脑": combo_url.Text = "桌面"; break;
+                case "收藏夹": combo_url.Text = "桌面"; break;
+                default:
+                    {
+                        try
+                        {
+                            combo_url.Text = Directory.GetParent(currpath).FullName;
+                        }
+
+                        catch
+                        {
+                            combo_url.Text = "我的电脑";
+                        }
+                        break;
+                    }
+
+            }
+            combo_url_SelectedIndexChanged(null, null);
+        }
+
+        private void toolStripSplitButton3_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            ToolStripSplitButton tsb = (ToolStripSplitButton)sender;
+            for (int i = 0; i < tsb.DropDownItems.Count; i++)
+            {
+                if (tsb.DropDownItems[i] != e.ClickedItem)
+                    ((ToolStripMenuItem)tsb.DropDownItems[i]).Checked = false;
+                else ((ToolStripMenuItem)tsb.DropDownItems[i]).Checked = true;
+
+            }
+            switch (e.ClickedItem.Text)
+            {
+                case "大图标": listView1.View = View.LargeIcon; break;
+                case "小图标": listView1.View = View.SmallIcon; break;
+                case "列表": listView1.View = View.List; break;
+                case "详细列表": listView1.View = View.Details; break;
+                default: listView1.View = View.Tile; break;
+            }
+        }
+
+        private void 复制ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenu_lv_Opening(object sender, CancelEventArgs e)
+        {
+            //复制，剪切，粘贴，删除，重命名，新建，刷新，属性
+            if (listView1.SelectedItems.Count == 0)//右键位置是1istview1的空白处
+            {
+                contextMenu_lv.Items["item_copy"].Enabled = false;
+                contextMenu_lv.Items["item_cut"].Enabled = false;
+                if (copyobj.Count == 0) contextMenu_lv.Items["item_paste"].Enabled = false;
+                else contextMenu_lv.Items["item_paste"].Enabled = true;
+
+                contextMenu_lv.Items["item_delete"].Enabled = false;
+                contextMenu_lv.Items["item_rename"].Enabled = false;
+                contextMenu_lv.Items["item_new"].Enabled = true;
+                contextMenu_lv.Items["item_refresh"].Enabled = true;
+                contextMenu_lv.Items["item_attr"].Enabled = false;
+            }
+            else
+            {
+                contextMenu_lv.Items["item_copy"].Enabled = true;
+                contextMenu_lv.Items["item_cut"].Enabled = true;
+                contextMenu_lv.Items["item_paste"].Enabled = false;
+                contextMenu_lv.Items["item_delete"].Enabled = true;
+                contextMenu_lv.Items["item_rename"].Enabled = true;
+                contextMenu_lv.Items["item_new"].Enabled = false;
+                contextMenu_lv.Items["item_refresh"].Enabled = false;
+                contextMenu_lv.Items["item_attr"].Enabled = true;
+            }
+        }
+
+        private void contextMenu_lv2_Opening(object sender, CancelEventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)//右键位置是1istview1的空白处
+            {
+                //我的电脑和收藏夹：刷新有效； 回收站：刷新和清空有效
+                contextMenu_lv2.Items["item_refresh2"].Enabled = true;
+                contextMenu_lv2.Items["item_open"].Enabled = false;
+                contextMenu_lv2.Items["item_revert"].Enabled = false;
+                contextMenu_lv2.Items["item_del"].Enabled = false;
+                if (combo_url.Text.Equals("回收站"))
+                    contextMenu_lv2.Items["item_empty"].Enabled = true;
+                else contextMenu_lv2.Items["item_empty"].Enabled = false;
+
+            }
+            else
+            {
+                //我的电脑和收藏夹：打开有效： 回收站：还原和删除有效
+                contextMenu_lv2.Items["item_empty"].Enabled = false;
+                contextMenu_lv2.Items["item_refresh2"].Enabled = false;
+                if (combo_url.Text.Equals("回收站"))
+                {
+                    contextMenu_lv2.Items["item_open"].Enabled = false;
+                    contextMenu_lv2.Items["item_revert"].Enabled = true;
+                    contextMenu_lv2.Items["item_del"].Enabled = true;
+                }
+
+                else
+                {
+                    contextMenu_lv2.Items["item_open"].Enabled = true;
+                    contextMenu_lv2.Items["item_revert"].Enabled = false;
+                    contextMenu_lv2.Items["item_del"].Enabled = false;
+                }
+
+            }
+        }
+        private void contextMenu_item_Click(object sender, CancelEventArgs e)
+        {
+            ToolStripItem tsi = (ToolStripItem)sender;
+            switch (tsi.Name)//根据菜单项的变量名区分单击的菜单项功能
+            {
+                case "item_copy": docopy(); break;//复制
+                case "item_cut": docut(); break;//剪切
+                case "item_paste": dopaste(); break;//粘贴
+                case "item_delete": dodelete(); break;//删除
+                case "item_rename": dorename(); break;//重命名
+                case "item_refresh": combo_url_SelectedIndexChanged(null, null); break; //刷新" +
+                case "item_attr": showattr(listView1.SelectedItems[0].Tag.ToString()); break;//属性
+                case "item_newfolder": donew("folder"); break;//新建文件夹
+                case "item_newword": donew("word"); break;//新建word文档
+                case "item_newtxt": donew("txt"); break;//新建文本文档
+                case "item_newexcel": donew("excel"); break;//新建excel文档
+                case "item_newppt": donew("ppt"); break;//新建演示文稿
+                case "item_open": OpenObj(listView1.SelectedItems[0]); break;//打开文件夹或设备
+                case "item_del": doRecycleDel(); break;//回收站-删除(即彻底删除)
+                case "item_revert": doRevert(); break;//回收站-还原
+                case "item_empty": doEmpty(); break;//回收站-清空
+                case "iten_refresh2": combo_url_SelectedIndexChanged(null, null); break;//刷新
+
+            }
+        }
+
+        private void doEmpty()
+        {
+            try
+            {
+                for (int i = 0; i < listView1.Items.Count; i++)
+                {
+                    string fullname = listView1.Items[i].Tag.ToString();
+                    if (File.Exists(fullname))
+                    {
+                        FileSystem.DeleteDirectory(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                    }
+                    else
+                        if (Directory.Exists(fullname))
+                        FileSystem.DeleteDirectory(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                    else MessageBox.Show(fullname + "，删除失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+            }
+            combo_url_SelectedIndexChanged(null, null);
+        }
+
+        private void doRevert()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void doRecycleDel()
+        {
+            if (listView1.SelectedItems.Count == 0) return;
+            try
+            {
+                for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                {
+                    string fullname = listView1.SelectedItems[i].Tag.ToString();
+                    if (File.Exists(fullname))
+                    {
+                        FileSystem.DeleteFile(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                    }
+                    else
+                        if (Directory.Exists(fullname))
+                        FileSystem.DeleteDirectory(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                    else MessageBox.Show(fullname + "，删除失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+                combo_url_SelectedIndexChanged(null, null);
+            }
+        }
+
+        private void OpenObj(ListViewItem listViewItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void donew(string newtype)
+        {
+            string newname = "";
+            string newext = "";
+            switch (newtype)
+            {
+                case "folder": newname = "新建文件夹"; break;
+                case "word": newname = "新建word文档"; newext = ".doc"; break;
+                case "txt": newname = "新建文本文档"; newext = ".txt"; break;
+                case "evcel": newname = "新建excel文档"; newext = ".xls"; break;
+                case "ppt": newname = "新建演示文稿"; newext = ".ppt"; break;
+            }
+            try
+            {
+                if (newtype.Equals("folder"))
+                {
+                    int i = 1;
+                    string temp = newname;
+                    while (File.Exists(Path.Combine(combo_url.Text, newname))) newname = temp + i++.ToString() + newext;
+                    File.Create(Path.Combine(combo_url.Text, newname));
+                    ListViewItem lv = new ListViewItem(newname);
+                    lv.Tag = Path.Combine(combo_url.Text, newname);
+                    lv.ImageKey = "defaultfolder";
+                    lv.IndentCount = 1;
+                    lv.SubItems.Add("文件夹");
+                    lv.SubItems.Add(DateTime.Now.ToString());
+                    lv.SubItems.Add("");
+                    lv.SubItems.Add(DateTime.Now.ToString());
+                    listView1.Items.Add(lv);
+                    listView1.Items[listView1.Items.Count - 1].Selected = true;
+                }
+                else
+                {
+                    int i = 1;
+                    string temp = newname;
+                    newname += newext;
+                    while (File.Exists(Path.Combine(combo_url.Text, newname))) newname = temp + i++.ToString() + newext;
+                    File.Create(Path.Combine(combo_url.Text, newname));
+                    ListViewItem lv = new ListViewItem(newname);
+                    lv.Tag = Path.Combine(combo_url.Text, newname);
+                    lv.ImageKey = GetFileIconKey(newext, Path.Combine(combo_url.Text, newname));
+                    lv.IndentCount = 1;
+                    string typename = getIcon.GetTypeName(Path.Combine(combo_url.Text, newname));
+                    lv.SubItems.Add(typename);
+                    lv.SubItems.Add(DateTime.Now.ToString());
+                    lv.SubItems.Add("");
+                    lv.SubItems.Add(DateTime.Now.ToString());
+                    listView1.Items.Add(lv);
+                    listView1.Items[listView1.Items.Count - 1].Selected = true;
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void showattr(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void dorename()
+        {
+            if (listView1.SelectedItems.Count == 0) return;
+            string oldname = listView1.SelectedItems[0].SubItems[0].Text;
+            if (oldname.Equals("我的电脑") || oldname.Equals("网络") || oldname.Equals("回收站") ||
+            oldname.Equals("我的文档")) return;
+            listView1.LabelEdit = true;
+            listView1.SelectedItems[0].BeginEdit();
+
+        }
+
+        private void dodelete()
+        {
+            try
+            {
+                if (listView1.SelectedItems.Count == 0) return;
+                for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                {
+                    string fullname = listView1.SelectedItems[i].Tag.ToString();
+                    if (File.Exists(fullname))
+                    {
+                        FileSystem.DeleteFile(fullname, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    }
+                    else
+                        if (Directory.Exists(fullname))
+                        FileSystem.DeleteDirectory(fullname, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    else MessageBox.Show(fullname + ",删除失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+            catch (Exception ee) { MessageBox.Show(ee.Message); }
+            combo_url_SelectedIndexChanged(null, null);
+        }
+
+        private void dopaste()
+        {
+            string currpath = combo_url.Text;
+            if (currpath.Equals("桌面")) currpath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            //如果复制对象数为0，或目录不存在，或源目录和目的目录相同，则返回
+            if (copyobj.Count == 0 || Directory.Exists(currpath) || currpath.Equals(Directory.GetParent(copyobj[0].ToString()).Name)) return;
+            for (int i = 0; i < copyobj.Count; i++)
+            {
+                if (File.Exists(copyobj[i].ToString())) copycut_file(copyobj[i].ToString(), currpath);//文件
+                else if (Directory.Exists(copyobj[i].ToString())) copycut_directory(copyobj[i].ToString(), currpath);//目录
+            }
+            if (iscut)
+            {
+                copyobj.Clear();
+            }
+            combo_url_SelectedIndexChanged(null, null);
+        }
+
+        private void copycut_directory(string s, string d)
+        {
+            try
+            {
+                DirectoryInfo sinfo = new DirectoryInfo(s);
+                string dname = sinfo.Name;
+                string destfullpath = Path.Combine(d, dname);
+                DialogResult result = DialogResult.Yes;
+                if (Directory.Exists(destfullpath))
+                {
+                    result = MessageBox.Show("目录“" + dname + "”已经存在，是否覆盖。”", "提示",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        Directory.Delete(destfullpath, true);
+                    }
+                    else return;
+                }
+                DirectoryInfo dinfo = new DirectoryInfo(destfullpath);
+                dinfo.Create();
+                FileInfo[] files = sinfo.GetFiles();
+                foreach (FileInfo file in files)
+                {
+                    file.CopyTo(Path.Combine(destfullpath, file.Name), true);//复制源目录中所有文件
+                }
+                DirectoryInfo[] dirs = sinfo.GetDirectories();
+                foreach (DirectoryInfo dir in dirs)
+                {
+                    copycut_directory(dir.FullName, destfullpath);//复制源目录中所有的子目录及其内容
+                }
+                if (iscut == true) sinfo.Delete(true);
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void copycut_file(string fullname, string destpath)
+        {
+            try
+            {
+                FileInfo finfo = new FileInfo(fullname);
+                string filename = finfo.Name;
+                string currpath = destpath;
+                string destfullnane = Path.Combine(currpath, filename);//目的完整留径及名称
+                DialogResult result = DialogResult.Yes;
+                if (File.Exists(destfullnane))
+                    result = MessageBox.Show("文件" + filename + "已经存在，是否覆盖·", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    finfo.CopyTo(destfullnane, true);
+                    if (iscut == true) File.Delete(fullname);//如果是剪切，则删除源文件
+                }
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void docut()
+        {
+            if (listView1.SelectedItems.Count == 0) return;
+            iscut = false;
+            copyobj.Clear();
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                copyobj.Add(listView1.SelectedItems[i].Tag.ToString());
+        }
+
+        private void docopy()
+        {
+            if (listView1.SelectedItems.Count == 0) return;
+            iscut = true;
+            copyobj.Clear();
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                copyobj.Add(listView1.SelectedItems[i].Tag.ToString());
+        }
+
+        private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            if (e.Label.Trim() == "" || e.Label.Trim().Equals(listView1.Items[e.Item].SubItems[0].Text.Trim()))
+                e.CancelEdit = true;
+            else
+            {
+                string newname = e.Label.Trim();
+                try
+                {
+                    if (File.Exists(listView1.Items[e.Item].Tag.ToString()))//如果是文件
+                    {
+                        if (File.Exists(Path.Combine(combo_url.Text, newname)))//如果新文件名已经存在
+                        {
+                            MessageBox.Show("文件名已经存在，请重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            e.CancelEdit = true;
+                        }
+                        else
+                        {
+                            File.Move(listView1.Items[e.Item].Tag.ToString(), Path.Combine(combo_url.Text, newname));
+                            listView1.Items[e.Item].Tag = Path.Combine(combo_url.Text, newname);
+                        }
+                    }
+                    else
+                        if (Directory.Exists(listView1.Items[e.Item].Tag.ToString()))//如果是文件夹
+                    {
+                        if (Directory.Exists(Path.Combine(combo_url.Text, newname)))//如果新文件名已经存在
+                        {
+                            MessageBox.Show("文件夹已经存在，请重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            e.CancelEdit = true;
+                        }
+                        else
+                        {
+                            Directory.Move(listView1.Items[e.Item].Tag.ToString(), Path.Combine(combo_url.Text, newname));
+                            listView1.Items[e.Item].Tag = Path.Combine(combo_url.Text, newname);
+                        }
+                    }
+                }
+                catch { }
+            }
+            listView1.LabelEdit = false;
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            if (text_search.Text.Trim().Equals(""))
+            {
+                combo_url_SelectedIndexChanged(null, null);
+                return;
+            }
+            if (combo_url.Text.Equals("回收站"))
+            {
+                for (int i = listView1.Items.Count - 1; i >= 0; i--)
+                {
+                    string temp = listView1.Items[i].SubItems[0].Text.ToUpper();
+                    if (temp.IndexOf(text_search.Text.Trim().ToUpper()) == -1) listView1.Items.RemoveAt(i);
+                }
+            }
+            else
+            {
+                lb_searching.Visible = true;
+                lb_ojbnum.Text = "0";
+                statusStrip1.Refresh();//刷新显示，让正在搜索的文字得以显示
+                                        //this.Refresh();
+                listView1.Items.Clear();
+                CreateCol_R();
+                string topfolder = combo_url.Text;
+                if (topfolder.Equals("我的电脑"))
+                {
+                    DriveInfo[] drives = DriveInfo.GetDrives();
+                    foreach (DriveInfo drive in drives)
+                        if (drive.IsReady) doSearchFile(drive.Name, text_search.Text.Trim());
+                }
+                else
+                    if (topfolder.Equals("收藏夹"))
+                {
+                    if (topfolder.Equals("收藏夹"))
+                    {
+                        doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), text_search.Text.Trim());
+                        doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), text_search.Text.Trim());
+                        doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), text_search.Text.Trim());
+                        doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), text_search.Text.Trim());
+                    }
+                    else
+                        doSearchFile(topfolder, text_search.Text.Trim());
+                }
+                lb_ojbnum.Text = listView1.Items.Count.ToString();
+                lb_searching.Visible = false;
+
+            }
+        }
+
+        private void doSearchFile(string topfolder, string content)
+        {
+            if (Directory.Exists(topfolder))
+            {
+                try
+                {
+                    string[] files = Directory.GetFiles(topfolder);
+                    foreach (string f in files)
+                    {
+                        try
+                        {
+                            FileInfo finfo = new FileInfo(f);
+                            if (finfo.Name.ToUpper().IndexOf(content.ToUpper()) != -1)
+                            {
+                                ListViewItem lv = new ListViewItem(finfo.Name);//名称
+                                lv.Tag = finfo.FullName;
+                                lv.IndentCount = 1;
+                                lv.ImageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标
+                                string typename = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称
+                                lv.SubItems.Add(typename);//类型
+                                lv.SubItems.Add(finfo.FullName);//位置
+                                lv.SubItems.Add(finfo.LastWriteTime.ToString());//修改时间
+                                listView1.Items.Add(lv);
+                            }
+                        }
+                        catch { }
+                    }
+                    string[] dirs = Directory.GetDirectories(topfolder);
+                    foreach (string d in dirs) doSearchFile(d, content);
+                }
+                catch { }
+            }
+
+        }
+
+
     }
 
 }

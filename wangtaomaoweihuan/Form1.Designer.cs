@@ -60,13 +60,33 @@
             this.lb_ojbnum = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.listView1 = new System.Windows.Forms.ListView();
             this.ch_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_totale = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_avail = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.contextMenu_lv = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.复制CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.剪切XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.粘贴VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除DELToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.重命名ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.新建ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.刷新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.属性ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.文本文档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.word文档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excel电子表格ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pPT演示文档ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenu_lv2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.刷新ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.还原ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,6 +100,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.contextMenu_lv.SuspendLayout();
+            this.contextMenu_lv2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -184,37 +206,37 @@
             // 复制ToolStripMenuItem
             // 
             this.复制ToolStripMenuItem.Name = "复制ToolStripMenuItem";
-            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.复制ToolStripMenuItem.Text = "复制";
             // 
             // 剪切ToolStripMenuItem
             // 
             this.剪切ToolStripMenuItem.Name = "剪切ToolStripMenuItem";
-            this.剪切ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.剪切ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.剪切ToolStripMenuItem.Text = "剪切";
             // 
             // 粘贴ToolStripMenuItem
             // 
             this.粘贴ToolStripMenuItem.Name = "粘贴ToolStripMenuItem";
-            this.粘贴ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.粘贴ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.粘贴ToolStripMenuItem.Text = "粘贴";
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.删除ToolStripMenuItem.Text = "删除";
             // 
             // 重命名ToolStripMenuItem
             // 
             this.重命名ToolStripMenuItem.Name = "重命名ToolStripMenuItem";
-            this.重命名ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.重命名ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.重命名ToolStripMenuItem.Text = "重命名";
             // 
             // 属性ToolStripMenuItem
             // 
             this.属性ToolStripMenuItem.Name = "属性ToolStripMenuItem";
-            this.属性ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.属性ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.属性ToolStripMenuItem.Text = "属性";
             // 
             // toolStripSplitButton2
@@ -244,32 +266,32 @@
             // 大图标ToolStripMenuItem
             // 
             this.大图标ToolStripMenuItem.Name = "大图标ToolStripMenuItem";
-            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.大图标ToolStripMenuItem.Text = "大图标";
             // 
             // 小图标ToolStripMenuItem
             // 
             this.小图标ToolStripMenuItem.Name = "小图标ToolStripMenuItem";
-            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.小图标ToolStripMenuItem.Text = "小图标";
             // 
             // 列表ToolStripMenuItem
             // 
             this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
-            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.列表ToolStripMenuItem.Text = "列表";
             // 
             // 详细列表ToolStripMenuItem
             // 
             this.详细列表ToolStripMenuItem.Name = "详细列表ToolStripMenuItem";
-            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.详细列表ToolStripMenuItem.Text = "详细列表";
             this.详细列表ToolStripMenuItem.Click += new System.EventHandler(this.详细列表ToolStripMenuItem_Click);
             // 
             // 详细大图标ToolStripMenuItem
             // 
             this.详细大图标ToolStripMenuItem.Name = "详细大图标ToolStripMenuItem";
-            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.详细大图标ToolStripMenuItem.Text = "详细大图标";
             // 
             // statusStrip1
@@ -279,9 +301,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lb_ojbnum});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 425);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1033, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1033, 26);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -314,7 +336,7 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer2.Panel2.Controls.Add(this.listView1);
-            this.splitContainer2.Size = new System.Drawing.Size(1033, 358);
+            this.splitContainer2.Size = new System.Drawing.Size(1033, 357);
             this.splitContainer2.SplitterDistance = 171;
             this.splitContainer2.TabIndex = 3;
             // 
@@ -325,41 +347,9 @@
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(171, 358);
+            this.treeView1.Size = new System.Drawing.Size(171, 357);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // imageList2
-            // 
-            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList2.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // ch_name
-            // 
-            this.ch_name.Text = "名称";
-            this.ch_name.Width = 98;
-            // 
-            // ch_type
-            // 
-            this.ch_type.Text = "类型";
-            this.ch_type.Width = 338;
-            // 
-            // ch_totale
-            // 
-            this.ch_totale.Text = "总大小";
-            this.ch_totale.Width = 311;
-            // 
-            // ch_avail
-            // 
-            this.ch_avail.Text = "可用空间";
-            this.ch_avail.Width = 77;
             // 
             // listView1
             // 
@@ -388,13 +378,186 @@
             this.listView1.LargeImageList = this.imageList2;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(858, 358);
+            this.listView1.Size = new System.Drawing.Size(858, 357);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // ch_name
+            // 
+            this.ch_name.Text = "名称";
+            this.ch_name.Width = 98;
+            // 
+            // ch_type
+            // 
+            this.ch_type.Text = "类型";
+            this.ch_type.Width = 338;
+            // 
+            // ch_totale
+            // 
+            this.ch_totale.Text = "总大小";
+            this.ch_totale.Width = 311;
+            // 
+            // ch_avail
+            // 
+            this.ch_avail.Text = "可用空间";
+            this.ch_avail.Width = 77;
+            // 
+            // imageList2
+            // 
+            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList2.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // contextMenu_lv
+            // 
+            this.contextMenu_lv.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenu_lv.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.复制CToolStripMenuItem,
+            this.剪切XToolStripMenuItem,
+            this.粘贴VToolStripMenuItem,
+            this.删除DELToolStripMenuItem,
+            this.重命名ToolStripMenuItem1,
+            this.新建ToolStripMenuItem,
+            this.刷新ToolStripMenuItem,
+            this.属性ToolStripMenuItem1});
+            this.contextMenu_lv.Name = "contextMenu_lv";
+            this.contextMenu_lv.Size = new System.Drawing.Size(146, 196);
+            // 
+            // 复制CToolStripMenuItem
+            // 
+            this.复制CToolStripMenuItem.Name = "复制CToolStripMenuItem";
+            this.复制CToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.复制CToolStripMenuItem.Text = "复制(C)";
+            // 
+            // 剪切XToolStripMenuItem
+            // 
+            this.剪切XToolStripMenuItem.Name = "剪切XToolStripMenuItem";
+            this.剪切XToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.剪切XToolStripMenuItem.Text = "剪切(X)";
+            // 
+            // 粘贴VToolStripMenuItem
+            // 
+            this.粘贴VToolStripMenuItem.Name = "粘贴VToolStripMenuItem";
+            this.粘贴VToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.粘贴VToolStripMenuItem.Text = "粘贴(V)";
+            // 
+            // 删除DELToolStripMenuItem
+            // 
+            this.删除DELToolStripMenuItem.Name = "删除DELToolStripMenuItem";
+            this.删除DELToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.删除DELToolStripMenuItem.Text = "删除(DEL)";
+            // 
+            // 重命名ToolStripMenuItem1
+            // 
+            this.重命名ToolStripMenuItem1.Name = "重命名ToolStripMenuItem1";
+            this.重命名ToolStripMenuItem1.Size = new System.Drawing.Size(145, 24);
+            this.重命名ToolStripMenuItem1.Text = "重命名";
+            // 
+            // 新建ToolStripMenuItem
+            // 
+            this.新建ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.文件夹ToolStripMenuItem,
+            this.文本文档ToolStripMenuItem,
+            this.word文档ToolStripMenuItem,
+            this.excel电子表格ToolStripMenuItem,
+            this.pPT演示文档ToolStripMenuItem});
+            this.新建ToolStripMenuItem.Name = "新建ToolStripMenuItem";
+            this.新建ToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.新建ToolStripMenuItem.Text = "新建";
+            // 
+            // 刷新ToolStripMenuItem
+            // 
+            this.刷新ToolStripMenuItem.Name = "刷新ToolStripMenuItem";
+            this.刷新ToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.刷新ToolStripMenuItem.Text = "刷新";
+            // 
+            // 属性ToolStripMenuItem1
+            // 
+            this.属性ToolStripMenuItem1.Name = "属性ToolStripMenuItem1";
+            this.属性ToolStripMenuItem1.Size = new System.Drawing.Size(145, 24);
+            this.属性ToolStripMenuItem1.Text = "属性";
+            // 
+            // 文件夹ToolStripMenuItem
+            // 
+            this.文件夹ToolStripMenuItem.Name = "文件夹ToolStripMenuItem";
+            this.文件夹ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.文件夹ToolStripMenuItem.Text = "文件夹";
+            // 
+            // 文本文档ToolStripMenuItem
+            // 
+            this.文本文档ToolStripMenuItem.Name = "文本文档ToolStripMenuItem";
+            this.文本文档ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.文本文档ToolStripMenuItem.Text = "文本文档";
+            // 
+            // word文档ToolStripMenuItem
+            // 
+            this.word文档ToolStripMenuItem.Name = "word文档ToolStripMenuItem";
+            this.word文档ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.word文档ToolStripMenuItem.Text = "word文档";
+            // 
+            // excel电子表格ToolStripMenuItem
+            // 
+            this.excel电子表格ToolStripMenuItem.Name = "excel电子表格ToolStripMenuItem";
+            this.excel电子表格ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.excel电子表格ToolStripMenuItem.Text = "excel电子表格";
+            // 
+            // pPT演示文档ToolStripMenuItem
+            // 
+            this.pPT演示文档ToolStripMenuItem.Name = "pPT演示文档ToolStripMenuItem";
+            this.pPT演示文档ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.pPT演示文档ToolStripMenuItem.Text = "PPT演示文档";
+            // 
+            // contextMenu_lv2
+            // 
+            this.contextMenu_lv2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenu_lv2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打开ToolStripMenuItem,
+            this.刷新ToolStripMenuItem1,
+            this.还原ToolStripMenuItem,
+            this.清空ToolStripMenuItem,
+            this.删除ToolStripMenuItem1});
+            this.contextMenu_lv2.Name = "contextMenu_lv2";
+            this.contextMenu_lv2.Size = new System.Drawing.Size(109, 124);
+            // 
+            // 打开ToolStripMenuItem
+            // 
+            this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.打开ToolStripMenuItem.Text = "打开";
+            // 
+            // 刷新ToolStripMenuItem1
+            // 
+            this.刷新ToolStripMenuItem1.Name = "刷新ToolStripMenuItem1";
+            this.刷新ToolStripMenuItem1.Size = new System.Drawing.Size(108, 24);
+            this.刷新ToolStripMenuItem1.Text = "刷新";
+            // 
+            // 还原ToolStripMenuItem
+            // 
+            this.还原ToolStripMenuItem.Name = "还原ToolStripMenuItem";
+            this.还原ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.还原ToolStripMenuItem.Text = "还原";
+            // 
+            // 清空ToolStripMenuItem
+            // 
+            this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
+            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.清空ToolStripMenuItem.Text = "清空";
+            // 
+            // 删除ToolStripMenuItem1
+            // 
+            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(108, 24);
+            this.删除ToolStripMenuItem1.Text = "删除";
             // 
             // Form1
             // 
@@ -424,6 +587,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.contextMenu_lv.ResumeLayout(false);
+            this.contextMenu_lv2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,6 +629,26 @@
         private System.Windows.Forms.ColumnHeader ch_type;
         private System.Windows.Forms.ColumnHeader ch_totale;
         private System.Windows.Forms.ColumnHeader ch_avail;
+        private System.Windows.Forms.ContextMenuStrip contextMenu_lv;
+        private System.Windows.Forms.ToolStripMenuItem 复制CToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 剪切XToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 粘贴VToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除DELToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 重命名ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 新建ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 文件夹ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 文本文档ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem word文档ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem excel电子表格ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pPT演示文档ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 刷新ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 属性ToolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip contextMenu_lv2;
+        private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 刷新ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 还原ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 清空ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
     }
 }
 
