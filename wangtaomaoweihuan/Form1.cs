@@ -115,8 +115,44 @@ namespace wangtaomaoweihuan
             treeView1.Nodes.Add(tnr);
 
             treeView1.EndUpdate();
+            this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
+        }
+        private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            TreeNode tn = treeView1.SelectedNode;
+            if (tn.Tag.Equals("mycomputer"))
+            {
+                tn.Nodes.Clear();
+                GetDriverTree(tn);
+            }
+            else
+                if (!tn.Tag.Equals("favorites"))
+            {
+                tn.Nodes.Clear();
+                GetFolderTree(tn);
+            }
         }
 
+        private void GetFolderTree(TreeNode tn)
+        {
+            string folderpath = tn.Tag.ToString();
+            string[] f_names = Directory.GetDirectories(folderpath);
+            foreach (string fn in f_names)
+            {
+                DirectoryInfo dinfo = new DirectoryInfo(fn);
+                TreeNode newtn = new TreeNode(dinfo.Name);
+                newtn.Tag = dinfo.FullName;
+                newtn.SelectedImageKey = newtn.ImageKey = "defaultfolder";
+                try
+                {
+                    string[] temos = Directory.GetDirectories(fn);
+                    if (temos.Length > 0) newtn.Nodes.Add("temp");
+                }
+                catch { }
+                tn.Nodes.Add(newtn);
+
+            }
+        }
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
 

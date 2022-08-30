@@ -20,3 +20,15 @@ C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaow
 C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.exe
 C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.pdb
 C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.CopyComplete
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.exe.config
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.exe
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.pdb
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.AssemblyReference.cache
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.SuggestedBindingRedirects.cache
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.Form1.resources
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.Properties.Resources.resources
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.GenerateResource.cache
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.CoreCompileInputs.cache
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.CopyComplete
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.exe
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.pdb
