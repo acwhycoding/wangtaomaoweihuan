@@ -117,6 +117,10 @@ namespace wangtaomaoweihuan
             treeView1.Nodes.Add(tnr);
 
             treeView1.EndUpdate();
+            GetDiverListview();
+            accesspaths.Add("我的电脑");
+            combo_url.DataSource = accesspaths;
+            combo_url.SelectedIndex = 0;
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
             combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
         }
