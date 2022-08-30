@@ -1,4 +1,5 @@
 ﻿using JHR_GetIcon;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace wangtaomaoweihuan
         GetIcon getIcon = new GetIcon();
         Icon[] myIcon;
         int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
+
         string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
 
         public Form1()
@@ -51,7 +53,7 @@ namespace wangtaomaoweihuan
 
         }
 
-        private void 详细liebiaoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 详细列表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -87,7 +89,7 @@ namespace wangtaomaoweihuan
             //在收藏夹下节点添加：我的文件，我的图片，我的音乐，我的视频
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             TreeNode tnl = new TreeNode("我的文档");
-            myIcon = geticon.GetIconbyFileName(mypath, FileAttributes.Directory);
+            myIcon = getIcon.GetIconByFileName(mypath, FileAttributes.Directory);
             imageList1.Images.Add("mydocument",myIcon[0]);
             imageList2.Images.Add("mydocument", myIcon[1]);
             tnl.SelectedImageKey = tnl.ImageKey = "mydocument";
@@ -95,8 +97,50 @@ namespace wangtaomaoweihuan
             tnf.Nodes.Add(tnl);
 
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+            tnl = new TreeNode("我的音乐");
+            myIcon = getIcon.GetIconByFileName(mypath, FileAttributes.Directory);
+            if(myIcon != null)
+            {
+                imageList1.Images.Add("mymusic",myIcon[0]);
+                imageList2.Images.Add("mymusic",myIcon[1]);
+                tnl.SelectedImageKey = tnl.ImageKey = "mymusic";
+                tnl.Tag= mypath;
+                tnl.Nodes.Add(tnl);
+            }
+
+            mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            tnl = new TreeNode("我的图片");
+            myIcon = getIcon.GetIconByFileName(mypath, FileAttributes.Directory);
+            if (myIcon != null)
+            {
+                imageList1.Images.Add("mypictures", myIcon[0]);
+                imageList2.Images.Add("mypictures", myIcon[1]);
+                tnl.SelectedImageKey = tnl.ImageKey = "mypicture";
+                tnl.Tag = mypath;
+                tnl.Nodes.Add(tnl);
+            }
+
+            mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            tnl = new TreeNode("我的视频");
+            myIcon = getIcon.GetIconByFileName(mypath, FileAttributes.Directory);
+            if (myIcon != null)
+            {
+                imageList1.Images.Add("myvideos", myIcon[0]);
+                imageList2.Images.Add("myvideos", myIcon[1]);
+                tnl.SelectedImageKey = tnl.ImageKey = "myvideos";
+                tnl.Tag = mypath;
+                tnl.Nodes.Add(tnl);
+            }
+            mypath = "recycle";
+            TreeNode tnr = new TreeNode("回收站");
+            tnr.SelectedImageKey = tnr.ImageKey = "recycle";
+            tnr.Tag = mypath;
+            treeView1.Nodes.Add(tnr);
+
+            treeView1.EndUpdate();
 
         }
+
 
         private void GetDriverTree(TreeNode root)
         {
@@ -145,7 +189,6 @@ namespace wangtaomaoweihuan
                 }
                 rootNodes.Add(tn);
             }
-            throw new NotImplementedException();
         }
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
@@ -156,6 +199,16 @@ namespace wangtaomaoweihuan
         private void splitContainer1_Panel2_SizeChanged(object sender, EventArgs e)
         {
             text_search.Width=splitContainer1.Panel2.Width-btn_search.Width-6;
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetDiverListview();
+        }
+
+        private void GetDiverListview()
+        {
+            throw new NotImplementedException();
         }
     }
 }
