@@ -16,7 +16,10 @@ namespace wangtaomaoweihuan
     public partial class Form1 : Form
     {
         ArrayList accesspaths = new ArrayList();
-        private object getIcon;
+        GetIcon getIcon = new GetIcon();
+        Icon[] myIcon;
+        int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
+        string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
 
         public Form1()
         {
@@ -25,12 +28,6 @@ namespace wangtaomaoweihuan
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GetIcon getIcon = new GetIcon();
-            Icon[] myIcon;
-            int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
-
-            string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
-
             for (int i = 0; i < myindexs.Length; i++)
             {
                 myIcon = getIcon.GetIconByIndex(myindexs[i]);
@@ -116,16 +113,37 @@ namespace wangtaomaoweihuan
                     case DriveType.Fixed: 
                         keyname = "localdriver";
                         if (drivername.Equals("")) drivername = "本地磁盘";
+                        break;
                     case DriveType.Removable: 
                         keyname = "movabledriver";
                         if (drivername.Equals("")) drivername = "移动存储";
+                        break;
                     case DriveType.CDRom: 
                         keyname = "cdrom";
                         if (drivername.Equals("")) drivername = "光盘驱动器";
+                        break;
                     default:
                         keyname = "movabledriver";
                         if (drivername.Equals("")) drivername = "未知设备";
+                        break;
                 }
+                drivername = drivername + "(" + driver.Name.Substring(0,2) + ")";
+                drivertag = driver.Name;
+                TreeNode tn = new TreeNode(drivername);
+                tn.SelectedImageKey = tn.ImageKey = keyname;
+                tn.Tag = drivertag;
+                if (driver.IsReady)
+                {
+
+                    try
+                    {
+                        DirectoryInfo directoryInfo = new DirectoryInfo(driver.Name);
+                        DirectoryInfo[] dirs = directoryInfo.GetDirectories();
+                        if (dirs.Length > 0) tn.Nodes.Add("temp");
+                    }
+                    catch { }
+                }
+                rootNodes.Add(tn);
             }
             throw new NotImplementedException();
         }
