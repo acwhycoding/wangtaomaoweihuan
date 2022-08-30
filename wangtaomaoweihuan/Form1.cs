@@ -51,7 +51,7 @@ namespace wangtaomaoweihuan
             TreeNode root = new TreeNode("我的电脑");
             root.SelectedImageKey = root.ImageKey = "computer";
             root.Tag = mypath;
-            treeView1.Nodes.Add("root");
+            treeView1.Nodes.Add(root);
 
             GetDriverTree(root);
 
