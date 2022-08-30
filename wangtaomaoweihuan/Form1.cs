@@ -389,7 +389,7 @@ namespace wangtaomaoweihuan
                     {
                         if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
                         accesspaths.Insert(0, "回收站");
-                        //GetRecyleListView();
+                        GetRecyleListView();
                         break;
                     }
                 case "收藏夹":
