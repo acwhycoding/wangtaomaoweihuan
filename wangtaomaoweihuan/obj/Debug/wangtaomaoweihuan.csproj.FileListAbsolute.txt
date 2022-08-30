@@ -1,0 +1,11 @@
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.exe.config
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.exe
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.pdb
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.AssemblyReference.cache
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.SuggestedBindingRedirects.cache
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.资源管理器.resources
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.Properties.Resources.resources
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.GenerateResource.cache
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.CoreCompileInputs.cache
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.exe
+C:\Users\mwh\Desktop\操作系统\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.pdb
