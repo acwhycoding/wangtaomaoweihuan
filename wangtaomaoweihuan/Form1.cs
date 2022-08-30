@@ -739,6 +739,79 @@ namespace wangtaomaoweihuan
         {
 
         }
+
+        private void listView1_ItemActivate(object sender, EventArgs e)
+        {
+            ListViewItem fitem = listView1.FocusedItem;
+            string fullname = fitem.Tag.ToString();
+            string urltext = combo_url.Text;
+            string mytype = fitem.SubItems[1].Text;
+            if (urltext.Equals("我的电脑"))
+            {
+                DriveInfo driveInfo = new DriveInfo(fullname);
+                if (driveInfo.IsReady) mytype = "文件夹";
+                else
+                {
+                    MessageBox.Show("设备未就绪，无法读取","提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    return;
+                }
+            }
+            if (urltext.Equals("回收站"))
+            {
+                MessageBox.Show("回收站的对象不能直接访问！");
+                return;
+            }
+            if (urltext.Equals("桌面"))
+            {
+                MessageBox.Show("网上邻居功能还未实现！");
+                return;
+            }
+            if (urltext.Equals("我的电脑") && fitem.SubItems[0].Text.Equals("网络"))
+            {
+                mytype = "文件夹";
+            }
+            switch (mytype)
+            {
+                case "文件夹":
+                    break;
+                case "":
+                    if(fitem.SubItems[0].Text.Equals("我的电脑"))
+                    {
+                        if(accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
+                        accesspaths.Insert(0, "我的电脑");
+                        GetDriveListview();
+
+                        combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
+                        combo_url.DataSource = null;
+                        combo_url.DataSource = accesspaths;
+                        combo_url.SelectedIndex = 0;
+                        combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
+                    }
+                    if (fitem.SubItems[0].Text.Equals("回收站"))
+                    {
+                        if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
+                        accesspaths.Insert(0, "回收站");
+                        GetRecyleListView();
+
+                        combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
+                        combo_url.DataSource = null;
+                        combo_url.DataSource = accesspaths;
+                        combo_url.SelectedIndex = 0;
+                        combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
+                    }
+                    break;
+                default:
+                    try
+                    {
+                        System.Diagnostics.Process.Start(fullname);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("无法打开或运行文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    break;
+            }
+        }
     }
 
 }
