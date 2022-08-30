@@ -369,6 +369,368 @@ namespace wangtaomaoweihuan
             columnHeader1.Name = "chfree";
             listView1.Columns.Add(columnHeader1);
         }
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode tn = e.Node;
+            int flag = 0;
+            switch (tn.Text)
+            {
+                case "桌面":
+                    {
+                        if (accesspaths.IndexOf("收藏夹") > -1) accesspaths.Remove("收藏夹");
+                        accesspaths.Insert(0, "收藏夹");
+                        GetDesktopListview(); break;
+                    }
+                case "我的电脑":
+                    {
+                        if (accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
+                        accesspaths.Insert(0, "我的电脑");
+                        GetDriveListview(); break;
+                    }
+                case "回收站":
+                    {
+                        if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
+                        accesspaths.Insert(0, "回收站");
+                        GetRecyleListView(); break;
+                    }
+                case "收藏夹":
+                    {
+                        if (accesspaths.IndexOf("收藏夹") > -1) accesspaths.Remove("收藏夹");
+                        accesspaths.Insert(0, "收藏夹");
+                        GetfavoritesListViev(); break;
+                    }
+                default:
+                    {
+                        flag = GetFolderListview(tn.Tag.ToString());
+                        if (flag == 0)
+                        {
+                            if (accesspaths.IndexOf(tn.Tag.ToString()) > -1) accesspaths.Remove(tn.Tag.ToString());
+                            accesspaths.Insert(0, tn.Tag.ToString());
+                        }
+                        break;
+                    }
+            }
+            if (flag == 0)
+            {
+                combo_url.DataSource = null;
+                combo_url.DataSource = accesspaths;
+                combo_url.SelectedIndex = 0;
+            }
+            else MessageBox.Show("访问失败，缺少权限或设备未就绪", "错误");
+
+        }
+
+        private int GetFolderListview(string p)
+        {
+            listView1.Items.Clear();
+            CreateCol_F;
+            string[] dirs;
+            string[] files;
+            try
+            {
+                dirs = Directory.GetDirectories(p);//获取路径p的子目录
+                files = Directory.GetFiles(p);//获取路径p下的文件
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+                return 1;
+            }
+            foreach (string dir in dirs) //处理目录对象
+            {
+                try
+                {
+                    DirectoryInfo dinfo = new DirectoryInfo(dir);
+                    lv = new ListViewItem(dinfo.Name);
+                    lv.Tag = dinfo.FullName;
+                    lv.InageKey = "defaultfolder";
+                    lv.SubItens.Add(dinfo.LastWriteTime.ToString());//修改时间
+                    lv.SubItens.Add("文件夹");//类型
+                    lv.SubItens.Add("");//大小
+                    lv.SubItens.Add(dinfo.CreationTime.ToString());//创建时间
+                    listView1.Items.Add(lv);
+                }
+                catch { }
+            }
+            foreach (string f in files)//处理文件对象
+            {
+                try
+                {
+                    FileInfo finfo = new FileInfo(f);
+                    lv = new ListViewItem(finfo.Name);//名称
+                    lv.Tag = finfo.FullName;
+                    lv.InageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标
+                    lv.SubItems.Add(finfo.LastWriteTime.ToString());//修改时间
+                    string typenane = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称lv.SubItens.Add(typename)://类型
+                    long size = finfo.Length;
+                    string sizestring = "";
+                    if (size < 1024) sizestring = size.ToString() + "Byte";
+                    else sizestring = (size / 1024).ToString() + "KB";
+                    lv.SubItems.Add(sizestring);//大小；
+                    lv.SubItems.Add(finfo.CreationTime.ToString());//创建时间
+                    listView1.Items.Add(lv);
+                }
+                catch { }
+            }
+            lb_ojbnum.Text = listView1.Items.Count.ToString();
+            return 0;
+        }
+
+        private void GetfavoritesListViev()
+        {
+
+            listView1.Items.Clear();
+            CreateCol_F();
+            string mypath = "";
+
+            mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ListViewItem lv = new ListViewItem("我的文档");//名称
+            lv.Tag = mypath;
+            lv.ImageKey = "mydocument";
+            DirectoryInfo dinfo = new DirectoryInfo(mypath);
+            lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+            lv.SubItems.Add("文件夹");//类型
+            lv.SubItems.Add("");//大小
+            lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
+            listView1.Items.Add(lv);
+
+
+            mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+            if (mypath != null && !mypath.Equals(""))
+            {
+                lv = new ListViewItem("我的音乐");//名称
+                lv.Tag = mypath;
+                lv.ImageKey = "mymusic";
+                dinfo = new DirectoryInfo(mypath);
+                lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+                lv.SubItems.Add("文件夹");//类型
+                lv.SubItems.Add("");//大小
+                lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
+                listView1.Items.Add(lv);
+            }
+            if (mypath != null && !mypath.Equals(""))
+            {
+                lv = new ListViewItem("我的图片");//名称
+                lv.Tag = mypath;
+                lv.ImageKey = "mypicture";
+                dinfo = new DirectoryInfo(mypath);
+                lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+                lv.SubItems.Add("文件夹");//类型
+                lv.SubItems.Add("");//大小
+                lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
+                listView1.Items.Add(lv);
+            }
+            if (mypath != null && !mypath.Equals(""))
+            {
+                lv = new ListViewItem("我的视频");//名称
+                lv.Tag = mypath;
+                lv.ImageKey = "mypicture";
+                dinfo = new DirectoryInfo(mypath);
+                lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+                lv.SubItems.Add("文件夹");//类型
+                lv.SubItems.Add("");//大小
+                lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
+                listView1.Items.Add(lv);
+            }
+            lb_ojbnum.Text = listView1.Items.Count.ToString();
+
+        }
+
+        private void GetRecyleListView()
+        {
+            listView1.Items.Clear();
+            CreateCol_R();
+            Shell shell = new Shell();//引用C:windows system32 shell32.dll，命名空间Shell32
+            Folder recycleBin = shell.NameSpace(10);
+            foreach (FolderItem f in recycleBin.Items())
+            {
+                ListViewItem lv = new ListViewItem(f.Name);
+                lv.Tag = f.Path;// 路径
+                lv.IndentCount = 1;
+                if (f.IsFolder)// 文件夹
+                {
+                    lv.ImageKey = "defaultfolder";
+                }
+                else
+                {
+                    lv.ImageKey = GetFileIconKey(f.Path.Substring(f.Path.LastIndexOf('.')), f.Path);
+                    lv.SubItems.Add(f.Type);
+                    lv.SubItems.Add(f.Path);
+                    lv.SubItems.Add(f.ModifyDate.ToStringO);
+                    listView1.Items.Add(lv);
+                }
+                lb_ojbnum.Text = listView1.Items.Count.ToString();
+            }
+        }
+
+        private void CreateCol_R()
+        {
+            listView1.Columns.Clear();
+            ColumnHeader columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "名称";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 200;
+            columnHeader1.Name = "chname";
+            listView1.Columns.Add(columnHeader1);
+
+            columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "类型";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 100;
+            columnHeader1.Name = "chtype";
+            listView1.Columns.Add(columnHeader1);
+
+            columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "位置";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 200;
+
+            columnHeader1.Name = "chpath";
+            listView1.Columns.Add(columnHeader1);
+            columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "修改日期";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 120;
+            columnHeader1.Name = "chdel";
+            listView1.Columns.Add(columnHeader1);
+
+        }
+
+
+
+        private void GetDesktopListview()
+        {
+            listView1.Items.Clear();
+            CreateCol_F();
+            ListViewItem lv = new ListViewItem("我的电脑");
+            lv.Tag = "mycomputer";
+            lv.ImageKey = "computer";
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            listView1.Items.Add(lv);
+
+            lv = new ListViewItem("我的文档");
+            lv.Tag = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            lv.ImageKey = "mydocument";
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            listView1.Items.Add(lv);
+
+            lv = new ListViewItem("网络");
+            lv.Tag = "network";
+            lv.ImageKey = "network";
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            listView1.Items.Add(lv);
+
+            lv = new ListViewItem("回收站");
+            lv.Tag = "recycle";
+            lv.ImageKey = "recycle";
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            lv.SubItems.Add("");
+            listView1.Items.Add(lv);
+            string[] dirs;
+            string[] files;
+            string p = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            try
+            {
+                dirs = Directory.GetDirectories(p);//获取路径p的子目录
+                files = Directory.GetFiles(p);//获取路径p下的文件
+
+                foreach (string dir in dirs)  //处理目录
+                {
+                    try
+                    {
+                        DirectoryInfo dinfo = new DirectoryInfo(dir);
+                        lv = new ListViewItem(dinfo.Name);
+                        lv.Tag = dinfo.FullName;
+                        lv.ImageKey = "defaultfolder";
+
+                        lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+                        lv.SubItems.Add("文件夹");//类型
+                        lv.SubItems.Add("");//大小
+                        lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
+                        listView1.Items.Add(lv);
+                    }
+                    catch { }
+                }
+                foreach (string f in files)//读取文件
+                {
+                    try
+                    {
+                        FileInfo finfo = new FileInfo(f);
+                        lv = new ListViewItem(finfo.Name);//名称
+                        lv.Tag = finfo.FullName;
+                        lv.ImageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标lv. SubItens.Add(finfo.LastWriteTine.ToString())://修改时间
+                        string typenane = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称lv.SubItens.Add(typenane)://类型
+                        long size = finfo.Length;
+                        string sizestring = "";
+                        if (size < 1024) sizestring = size.ToString() + "Byte";
+                        else sizestring = (size / 1024).ToString() + "KB";
+                        lv.SubItems.Add(sizestring);//大小；
+                        lv.SubItems.Add(finfo.CreationTime.ToString());//创建时间
+                        listView1.Items.Add(lv);
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+
+        }
+
+        private string GetFileIconKey(string exten, string fullname)
+        {
+            string imgkey = "";
+            Icon[] myIcon;
+            //提取可执行文件/快捷方式的专用图标，如果失败则使用默认可执行文件图标/未知文件图标
+            if (exten.ToUpper().Equals(".EXE") || exten.ToUpper().Equals("LNK"))
+            {
+                myIcon = getIcon.GetIconByFileName(fullname, FileAttributes.Normal);
+                if (myIcon != null)
+                {
+                    if (myIcon[0] != null && myIcon[1] != null)
+                    { //更新该类型文件的图标
+                        if (imageList1.Images.ContainsKey(fullname)) imageList1.Images.RemoveByKey(fullname);
+                        if (imageList2.Images.ContainsKey(fullname)) imageList2.Images.RemoveByKey(fullname);
+                        imageList1.Images.Add(fullname, myIcon[0]);
+                        imageList2.Images.Add(fullname, myIcon[1]);
+                        imgkey = fullname;
+                    }
+                }
+                if (imgkey == "") // 如果获取图标失败，则设置默认图标
+                {
+                    if (exten.ToUpper().Equals(".EXE")) imgkey = "defaultexeicon";
+                    else imgkey = "unknowicon";
+                }
+            }
+            else
+            {
+                myIcon = getIcon.GetIconByFileType(exten);
+                if (myIcon != null)
+                {
+                    if (myIcon[0] != null && myIcon[1] != null)
+                    {
+                        if (imageList1.Images.ContainsKey(exten)) imageList1.Images.RemoveByKey(exten);
+                        if (imageList2.Images.ContainsKey(exten)) imageList2.Images.RemoveByKey(exten);
+                        imageList1.Images.Add(exten, myIcon[0]);
+                        imageList2.Images.Add(exten, myIcon[1]);
+                        imgkey = exten;
+                    }
+                    else imgkey = "unknowicon";
+                }
+                else imgkey = "unknowicon";
+            }
+            return imgkey;
+        }
+
     }
-   
+
 }
