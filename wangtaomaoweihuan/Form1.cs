@@ -23,7 +23,7 @@ namespace wangtaomaoweihuan
         int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
 
         string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
-
+        bool flag_pre_next = false;
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +47,7 @@ namespace wangtaomaoweihuan
             desk.ImageKey = desk.SelectedImageKey = "desktop";
             desk.Tag = mypath;
             treeView1.Nodes.Add(desk);
+            
             //我的电脑节点
             mypath = "mycomputer";
             TreeNode root = new TreeNode("我的电脑");
@@ -128,8 +129,7 @@ namespace wangtaomaoweihuan
                 tn.Nodes.Clear();
                 GetDriverTree(tn);
             }
-            else
-                if (!tn.Tag.Equals("favorites"))
+            else if (!tn.Tag.Equals("favorites"))
             {
                 tn.Nodes.Clear();
                 GetFolderTree(tn);
@@ -376,8 +376,8 @@ namespace wangtaomaoweihuan
             {
                 case "桌面":
                     {
-                        if (accesspaths.IndexOf("收藏夹") > -1) accesspaths.Remove("收藏夹");
-                        accesspaths.Insert(0, "收藏夹");
+                        if (accesspaths.IndexOf("桌面") > -1) accesspaths.Remove("桌面");
+                        accesspaths.Insert(0, "桌面");
                         GetDesktopListview(); break;
                     }
                 case "我的电脑":
@@ -449,8 +449,9 @@ namespace wangtaomaoweihuan
                     ListViewItem lv = new ListViewItem(dinfo.Name);
                     lv.Tag = dinfo.FullName;
                     lv.ImageKey = "defaultfolder";
-                    lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
                     lv.SubItems.Add("文件夹");//类型
+                    lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+                  
                     lv.SubItems.Add("");//大小
                     lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
                     listView1.Items.Add(lv);
@@ -688,6 +689,7 @@ namespace wangtaomaoweihuan
                 }
             }
             catch { }
+            lb_ojbnum.Text = listView1.Items.Count.ToString();
 
         }
 
@@ -838,7 +840,7 @@ namespace wangtaomaoweihuan
         private void combo_url_SelectedIndexChanged(object sender, EventArgs e)
         {
             int flag = 0;
-            string newpath = combo_url.Text.Trim();
+            string newpath = combo_url.Text;
             switch (newpath)
             {
                 case "桌面":
@@ -846,7 +848,7 @@ namespace wangtaomaoweihuan
                     {
                         if (flag_pre_next == false)
                         {
-                            accesspaths.Remove("点面");
+                            accesspaths.Remove("桌面");
                             accesspaths.Insert(0, "桌面");
                         }
 
@@ -915,6 +917,5 @@ namespace wangtaomaoweihuan
 
         }
     }
-}
 
 }
