@@ -1,11 +1,15 @@
 ﻿using JHR_GetIcon;
+<<<<<<< HEAD
 using Microsoft.VisualBasic;
+=======
+>>>>>>> 35f13cb1d9bab82b84a0801561ed389d124df459
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +20,19 @@ namespace wangtaomaoweihuan
     public partial class Form1 : Form
     {
         ArrayList accesspaths = new ArrayList();
+<<<<<<< HEAD
         Icon[] myIcon;
         public Form1()
         {
             InitializeComponent();
            
+=======
+        private object getIcon;
+
+        public Form1()
+        {
+            InitializeComponent();
+>>>>>>> 35f13cb1d9bab82b84a0801561ed389d124df459
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,7 +48,6 @@ namespace wangtaomaoweihuan
                 myIcon = getIcon.GetIconByIndex(myindexs[i]);
                 imageList1.Images.Add(mykeys[i], myIcon[0]);
                 imageList2.Images.Add(mykeys[i], myIcon[1]);
-
             }
         }
 
@@ -110,6 +121,7 @@ namespace wangtaomaoweihuan
                 tnl.Nodes.Add(tnl);
             }
 
+<<<<<<< HEAD
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             tnl = new TreeNode("我的图片");
             myIcon = geticon.GetIconByFileName(mypath, FileAttribute.Directory);
@@ -145,6 +157,36 @@ namespace wangtaomaoweihuan
 
         private void GetDriverTree(TreeNode root)
         {
+=======
+        }
+
+        private void GetDriverTree(TreeNode root)
+        {
+            DriveInfo[] drivers = DriveInfo.GetDrives();
+            string keyname = "";
+            string drivername = "";
+            string drivertag = "";
+            foreach(DriveInfo driver in drivers)
+            {
+                if (driver.IsReady) drivername = driver.VolumeLabel;
+                else drivername = "";
+                switch (driver.DriveType)
+                {
+                    case DriveType.Fixed: 
+                        keyname = "localdriver";
+                        if (drivername.Equals("")) drivername = "本地磁盘";
+                    case DriveType.Removable: 
+                        keyname = "movabledriver";
+                        if (drivername.Equals("")) drivername = "移动存储";
+                    case DriveType.CDRom: 
+                        keyname = "cdrom";
+                        if (drivername.Equals("")) drivername = "光盘驱动器";
+                    default:
+                        keyname = "movabledriver";
+                        if (drivername.Equals("")) drivername = "未知设备";
+                }
+            }
+>>>>>>> 35f13cb1d9bab82b84a0801561ed389d124df459
             throw new NotImplementedException();
         }
 
