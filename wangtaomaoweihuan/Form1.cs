@@ -82,7 +82,7 @@ namespace wangtaomaoweihuan
                 imageList2.Images.Add("mymusic", myIcon[1]);
                 tnl.SelectedImageKey = tnl.ImageKey = "mymusic";
                 tnl.Tag = mypath;
-                tnl.Nodes.Add(tnl);
+                tnf.Nodes.Add(tnl);
             }
 
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -94,7 +94,7 @@ namespace wangtaomaoweihuan
                 imageList2.Images.Add("mypictures", myIcon[1]);
                 tnl.SelectedImageKey = tnl.ImageKey = "mypicture";
                 tnl.Tag = mypath;
-                tnl.Nodes.Add(tnl);
+                tnfl.Nodes.Add(tnl);
             }
 
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
@@ -106,7 +106,7 @@ namespace wangtaomaoweihuan
                 imageList2.Images.Add("myvideos", myIcon[1]);
                 tnl.SelectedImageKey = tnl.ImageKey = "myvideos";
                 tnl.Tag = mypath;
-                tnl.Nodes.Add(tnl);
+                tnf.Nodes.Add(tnl);
             }
             mypath = "recycle";
             TreeNode tnr = new TreeNode("回收站");
