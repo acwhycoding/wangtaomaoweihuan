@@ -83,14 +83,14 @@ namespace wangtaomaoweihuan
             mypath = "favorites";
             TreeNode tnf = new TreeNode("收藏夹");
             tnf.SelectedImageKey = tnf.ImageKey = "favorites";
-            tnf.Tag= mypath;
+            tnf.Tag = mypath;
             treeView1.Nodes.Add(tnf);
 
             //在收藏夹下节点添加：我的文件，我的图片，我的音乐，我的视频
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             TreeNode tnl = new TreeNode("我的文档");
             myIcon = getIcon.GetIconByFileName(mypath, FileAttributes.Directory);
-            imageList1.Images.Add("mydocument",myIcon[0]);
+            imageList1.Images.Add("mydocument", myIcon[0]);
             imageList2.Images.Add("mydocument", myIcon[1]);
             tnl.SelectedImageKey = tnl.ImageKey = "mydocument";
             tnl.Tag = mypath;
@@ -99,12 +99,12 @@ namespace wangtaomaoweihuan
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
             tnl = new TreeNode("我的音乐");
             myIcon = getIcon.GetIconByFileName(mypath, FileAttributes.Directory);
-            if(myIcon != null)
+            if (myIcon != null)
             {
-                imageList1.Images.Add("mymusic",myIcon[0]);
-                imageList2.Images.Add("mymusic",myIcon[1]);
+                imageList1.Images.Add("mymusic", myIcon[0]);
+                imageList2.Images.Add("mymusic", myIcon[1]);
                 tnl.SelectedImageKey = tnl.ImageKey = "mymusic";
-                tnl.Tag= mypath;
+                tnl.Tag = mypath;
                 tnl.Nodes.Add(tnl);
             }
 
@@ -148,21 +148,21 @@ namespace wangtaomaoweihuan
             string keyname = "";
             string drivername = "";
             string drivertag = "";
-            foreach(DriveInfo driver in drivers)
+            foreach (DriveInfo driver in drivers)
             {
                 if (driver.IsReady) drivername = driver.VolumeLabel;
                 else drivername = "";
                 switch (driver.DriveType)
                 {
-                    case DriveType.Fixed: 
+                    case DriveType.Fixed:
                         keyname = "localdriver";
                         if (drivername.Equals("")) drivername = "本地磁盘";
                         break;
-                    case DriveType.Removable: 
+                    case DriveType.Removable:
                         keyname = "movabledriver";
                         if (drivername.Equals("")) drivername = "移动存储";
                         break;
-                    case DriveType.CDRom: 
+                    case DriveType.CDRom:
                         keyname = "cdrom";
                         if (drivername.Equals("")) drivername = "光盘驱动器";
                         break;
@@ -171,7 +171,7 @@ namespace wangtaomaoweihuan
                         if (drivername.Equals("")) drivername = "未知设备";
                         break;
                 }
-                drivername = drivername + "(" + driver.Name.Substring(0,2) + ")";
+                drivername = drivername + "(" + driver.Name.Substring(0, 2) + ")";
                 drivertag = driver.Name;
                 TreeNode tn = new TreeNode(drivername);
                 tn.SelectedImageKey = tn.ImageKey = keyname;
@@ -193,12 +193,12 @@ namespace wangtaomaoweihuan
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
         {
-            combo_url.Width = splitContainer1.Panel1.Width - btn_next.Width - btn_pre.Width - 6; 
+            combo_url.Width = splitContainer1.Panel1.Width - btn_next.Width - btn_pre.Width - 6;
         }
 
         private void splitContainer1_Panel2_SizeChanged(object sender, EventArgs e)
         {
-            text_search.Width=splitContainer1.Panel2.Width-btn_search.Width-6;
+            text_search.Width = splitContainer1.Panel2.Width - btn_search.Width - 6;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -208,7 +208,59 @@ namespace wangtaomaoweihuan
 
         private void GetDiverListview()
         {
-            throw new NotImplementedException();
+            listView1.Items.Clear();
+            CreateCol_D();
+            DriveInfo[] drivers = DriveInfo.GetDrives();
+            string lvname1, lvname2, lvtype, keyname, lvtotal = "", lvfree = "";
+            foreach (DriveInfo driver in drivers)
+            {
+                ListViewItem newitem = new ListViewItem();
+                newitem.IndentCount = 1;
+                if (driver.IsReady) lvname1 = driver.VolumeLabel;
+                else lvname1 = "";
+                lvname2 = driver.Name;
+                switch (driver.DriveType)
+                {
+                    case DriveType.Fixed:
+                        keyname = "localdriver";
+                        lvtype = "本地磁盘";
+                        if (lvname1.Equals("")) lvname1 = "本地磁盘";
+                        newitem.Group = listView1.Groups["lvGroup1"];
+                        break;
+                    case DriveType.Removable:
+                        keyname = "movabledriver";
+                        lvtype = "移动储存";
+                        if (lvname1.Equals("")) lvname1 = "移动存储";
+                        newitem.Group = listView1.Groups["lvGroup2"];
+                        break;
+                    case DriveType.CDRom:
+                        keyname = "cdrom";
+                        lvtype = "光盘驱动器";
+                        if (lvname1.Equals("")) lvname1 = "光盘驱动器";
+                        newitem.Group = listView1.Groups["lvGroup3"];
+                        break;
+                    default:
+                        keyname = "movabledriver";
+                        lvtype = "未知设备";
+                        if (lvname1.Equals("")) lvname1 = "未知设备";
+                        newitem.Group = listView1.Groups["lvGroup4"];
+                        break;
+                }
+                newitem.SubItems[0].Text = (lvname1 + "(" + lvname2.Substring(0, 2) + ")");
+                newitem.SubItems.Add(lvtype);
+                if (driver.IsReady)
+                {
+                    lvtotal = Math.Round(driver.TotalSize / (1024 * 1024 * 1.0), 1).ToString() + "G";
+                    lvfree = Math.Round(driver.TotalFreeSpace / (1024 * 1024 * 1024 * 1.0), 1).ToString() + "G";
+                }
+                newitem.SubItems.Add(lvtotal);
+                newitem.SubItems.Add(lvfree);
+                newitem.ImageKey = keyname;
+                newitem.Tag = lvname2;
+                listView1.Items.Add(newitem);
+            }
+            lb_objnum.Text = listView1.Items.Count.ToString();
         }
+
     }
 }
