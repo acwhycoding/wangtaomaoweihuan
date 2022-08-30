@@ -242,6 +242,45 @@ namespace wangtaomaoweihuan
             columnHeader1.Name = "chfree";
             listView1.Columns.Add(columnHeader1);
         }
+        private void CreateCol_F()
+        {
+            listView1.Columns.Clear();
+
+            ColumnHeader columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "名称";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 200;
+            columnHeader1.Name = "chname";
+            listView1.Columns.Add(columnHeader1);
+
+            columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "类型";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 100;
+            columnHeader1.Name = "chtype";
+            listView1.Columns.Add(columnHeader1);
+
+            columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "修改时间";
+            columnHeader1.TextAlign = HorizontalAlignment.Left;
+            columnHeader1.Width = 120;
+            columnHeader1.Name = "chmodify";
+            listView1.Columns.Add(columnHeader1);
+
+            columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "大小";
+            columnHeader1.TextAlign = HorizontalAlignment.Right;
+            columnHeader1.Width = 120;
+            columnHeader1.Name = "chtotal";
+            listView1.Columns.Add(columnHeader1);
+
+            columnHeader1 = new ColumnHeader();
+            columnHeader1.Text = "创建时间";
+            columnHeader1.TextAlign = HorizontalAlignment.Center;
+            columnHeader1.Width = 120;
+            columnHeader1.Name = "chcreate";
+            listView1.Columns.Add(columnHeader1);
+        }
     }
     
 }
