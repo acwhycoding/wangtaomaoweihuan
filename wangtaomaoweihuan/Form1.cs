@@ -19,10 +19,7 @@ namespace wangtaomaoweihuan
     {
         ArrayList accesspaths = new ArrayList();
         GetIcon getIcon = new GetIcon();
-        Icon[] myIcon;
-        int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
-
-        string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
+        
         bool flag_pre_next = false;
         public Form1()
         {
@@ -31,6 +28,10 @@ namespace wangtaomaoweihuan
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Icon[] myIcon;
+            int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
+
+            string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
             for (int i = 0; i < myindexs.Length; i++)
             {
                 myIcon = getIcon.GetIconByIndex(myindexs[i]);
@@ -117,14 +118,68 @@ namespace wangtaomaoweihuan
             treeView1.Nodes.Add(tnr);
 
             treeView1.EndUpdate();
-            GetDiverListview();
+            GetDriverListview();
             accesspaths.Add("我的电脑");
             combo_url.DataSource = accesspaths;
             combo_url.SelectedIndex = 0;
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
             combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
         }
-
+        private void GetDriverListview()
+        {
+            listView1.Items.Clear();
+            CreateCol_D();
+            DriveInfo[] drivers = DriveInfo.GetDrives();
+            string lvname1, lvname2, lvtype, keyname, lvtotal = "", lvfree = "";
+            foreach (DriveInfo driver in drivers)
+            {
+                ListViewItem newitem = new ListViewItem();
+                newitem.IndentCount = 1;
+                if (driver.IsReady) lvname1 = driver.VolumeLabel;
+                else lvname1 = "";
+                lvname2 = driver.Name;
+                switch (driver.DriveType)
+                {
+                    case DriveType.Fixed:
+                        keyname = "localdriver";
+                        lvtype = "本地磁盘";
+                        if (lvname1.Equals("")) lvname1 = "本地磁盘";
+                        newitem.Group = listView1.Groups["listViewGroup1"];
+                        break;
+                    case DriveType.Removable:
+                        keyname = "movabledriver";
+                        lvtype = "移动储存";
+                        if (lvname1.Equals("")) lvname1 = "移动存储";
+                        newitem.Group = listView1.Groups["listViewGroup2"];
+                        break;
+                    case DriveType.CDRom:
+                        keyname = "cdrom";
+                        lvtype = "光盘驱动器";
+                        if (lvname1.Equals("")) lvname1 = "光盘驱动器";
+                        newitem.Group = listView1.Groups["listViewGroup3"];
+                        break;
+                    default:
+                        keyname = "movabledriver";
+                        lvtype = "未知设备";
+                        if (lvname1.Equals("")) lvname1 = "未知设备";
+                        newitem.Group = listView1.Groups["listViewGroup4"];
+                        break;
+                }
+                newitem.SubItems[0].Text = (lvname1 + "(" + lvname2.Substring(0, 2) + ")");
+                newitem.SubItems.Add(lvtype);
+                if (driver.IsReady)
+                {
+                    lvtotal = Math.Round(driver.TotalSize / (1024 * 1024 * 1.0), 1).ToString() + "G";
+                    lvfree = Math.Round(driver.TotalFreeSpace / (1024 * 1024 * 1024 * 1.0), 1).ToString() + "G";
+                }
+                newitem.SubItems.Add(lvtotal);
+                newitem.SubItems.Add(lvfree);
+                newitem.ImageKey = keyname;
+                newitem.Tag = lvname2;
+                listView1.Items.Add(newitem);
+            }
+            lb_ojbnum.Text = listView1.Items.Count.ToString();
+        }
         private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             TreeNode tn = treeView1.SelectedNode;
@@ -167,11 +222,6 @@ namespace wangtaomaoweihuan
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
         {
 
         }
@@ -243,7 +293,7 @@ namespace wangtaomaoweihuan
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GetDiverListview();
+            GetDriverListview();
         }
 
         private void CreateCol_F()
@@ -333,7 +383,7 @@ namespace wangtaomaoweihuan
                     {
                         if (accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
                         accesspaths.Insert(0, "我的电脑");
-                        GetDiverListview(); break;
+                        GetDriverListview(); break;
                     }
                 case "回收站":
                     {
@@ -369,61 +419,7 @@ namespace wangtaomaoweihuan
 
         }
 
-        private void GetDiverListview()
-        {
-            listView1.Items.Clear();
-            CreateCol_D();
-            DriveInfo[] drivers = DriveInfo.GetDrives();
-            string lvname1, lvname2, lvtype, keyname, lvtotal = "", lvfree = "";
-            foreach (DriveInfo driver in drivers)
-            {
-                ListViewItem newitem = new ListViewItem();
-                newitem.IndentCount = 1;
-                if (driver.IsReady) lvname1 = driver.VolumeLabel;
-                else lvname1 = "";
-                lvname2 = driver.Name;
-                switch (driver.DriveType)
-                {
-                    case DriveType.Fixed:
-                        keyname = "localdriver";
-                        lvtype = "本地磁盘";
-                        if (lvname1.Equals("")) lvname1 = "本地磁盘";
-                        newitem.Group = listView1.Groups["lvGroup1"];
-                        break;
-                    case DriveType.Removable:
-                        keyname = "movabledriver";
-                        lvtype = "移动储存";
-                        if (lvname1.Equals("")) lvname1 = "移动存储";
-                        newitem.Group = listView1.Groups["lvGroup2"];
-                        break;
-                    case DriveType.CDRom:
-                        keyname = "cdrom";
-                        lvtype = "光盘驱动器";
-                        if (lvname1.Equals("")) lvname1 = "光盘驱动器";
-                        newitem.Group = listView1.Groups["lvGroup3"];
-                        break;
-                    default:
-                        keyname = "movabledriver";
-                        lvtype = "未知设备";
-                        if (lvname1.Equals("")) lvname1 = "未知设备";
-                        newitem.Group = listView1.Groups["lvGroup4"];
-                        break;
-                }
-                newitem.SubItems[0].Text = (lvname1 + "(" + lvname2.Substring(0, 2) + ")");
-                newitem.SubItems.Add(lvtype);
-                if (driver.IsReady)
-                {
-                    lvtotal = Math.Round(driver.TotalSize / (1024 * 1024 * 1.0), 1).ToString() + "G";
-                    lvfree = Math.Round(driver.TotalFreeSpace / (1024 * 1024 * 1024 * 1.0), 1).ToString() + "G";
-                }
-                newitem.SubItems.Add(lvtotal);
-                newitem.SubItems.Add(lvfree);
-                newitem.ImageKey = keyname;
-                newitem.Tag = lvname2;
-                listView1.Items.Add(newitem);
-            }
-            lb_ojbnum.Text = listView1.Items.Count.ToString();
-        }
+       
 
         private int GetFolderListview(string p)
         {
@@ -466,9 +462,10 @@ namespace wangtaomaoweihuan
                     ListViewItem lv = new ListViewItem(finfo.Name);//名称
                     lv.Tag = finfo.FullName;
                     lv.ImageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标
-                    lv.SubItems.Add(finfo.LastWriteTime.ToString());//修改时间
                     string typenane = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称lv.SubItens.Add(typename)://类型
                     long size = finfo.Length;
+                    lv.SubItems.Add(finfo.LastWriteTime.ToString());//修改时间
+                    
                     string sizestring = "";
                     if (size < 1024) sizestring = size.ToString() + "Byte";
                     else sizestring = (size / 1024).ToString() + "KB";
@@ -659,9 +656,9 @@ namespace wangtaomaoweihuan
                         lv = new ListViewItem(dinfo.Name);
                         lv.Tag = dinfo.FullName;
                         lv.ImageKey = "defaultfolder";
-
-                        lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
                         lv.SubItems.Add("文件夹");//类型
+                        lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+                       
                         lv.SubItems.Add("");//大小
                         lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
                         listView1.Items.Add(lv);
@@ -675,8 +672,11 @@ namespace wangtaomaoweihuan
                         FileInfo finfo = new FileInfo(f);
                         lv = new ListViewItem(finfo.Name);//名称
                         lv.Tag = finfo.FullName;
-                        lv.ImageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标lv. SubItens.Add(finfo.LastWriteTine.ToString())://修改时间
-                        string typenane = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称lv.SubItens.Add(typenane)://类型
+                        lv.ImageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标
+                        
+                        string typenane = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称
+                        lv.SubItems.Add(typenane);//类型
+                        lv.SubItems.Add(finfo.LastWriteTime.ToString());//修改时间
                         long size = finfo.Length;
                         string sizestring = "";
                         if (size < 1024) sizestring = size.ToString() + "Byte";
@@ -695,10 +695,11 @@ namespace wangtaomaoweihuan
 
         private string GetFileIconKey(string exten, string fullname)
         {
+            //Console.WriteLine(exten + "   " + fullname);
             string imgkey = "";
             Icon[] myIcon;
             //提取可执行文件/快捷方式的专用图标，如果失败则使用默认可执行文件图标/未知文件图标
-            if (exten.ToUpper().Equals(".EXE") || exten.ToUpper().Equals("LNK"))
+            if (exten.ToUpper().Equals(".EXE") || exten.ToUpper().Equals(".LNK"))
             {
                 myIcon = getIcon.GetIconByFileName(fullname, FileAttributes.Normal);
                 if (myIcon != null)
@@ -735,6 +736,7 @@ namespace wangtaomaoweihuan
                 }
                 else imgkey = "unknowicon";
             }
+            Console.WriteLine(imgkey);
             return imgkey;
         }
 
@@ -782,7 +784,7 @@ namespace wangtaomaoweihuan
                     {
                         if(accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
                         accesspaths.Insert(0, "我的电脑");
-                        GetDiverListview();
+                        GetDriverListview();
 
                         combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
                         combo_url.DataSource = null;
@@ -829,91 +831,24 @@ namespace wangtaomaoweihuan
                 combo_url.SelectedIndex += 1;
             }
 
-
         }
         private void btn_next_Click(object sender, EventArgs e)
         {
             //前进按钮
-           
+            if (combo_url.SelectedIndex == 0)
+            {
+                MessageBox.Show("已经是前进的最后一个目录了", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            else
+            {
+                flag_pre_next = true;
+                combo_url.SelectedIndex -= 1;
+            }
         }
 
         private void combo_url_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int flag = 0;
-            string newpath = combo_url.Text;
-            switch (newpath)
-            {
-                case "桌面":
-                    // 如果不是前进或后退引起的地址变换，则把选中的路径调整到最新位置
-                    {
-                        if (flag_pre_next == false)
-                        {
-                            accesspaths.Remove("桌面");
-                            accesspaths.Insert(0, "桌面");
-                        }
-
-                        GetDesktopListview(); break;
-                    }
-                case "我的电脑":
-                    {
-                        if (flag_pre_next == false)
-                        {
-                            accesspaths.Remove("我的电脑");
-                            accesspaths.Insert(0, "我的电脑");
-                        }
-
-                        GetDiverListview(); break;
-                    }
-
-                case "回收站"://回收站目前不提供还原功能
-                    {
-                        if (flag_pre_next == false)
-                        {
-                            accesspaths.Remove("回收站");
-                            accesspaths.Insert(0, "回收站");
-                        }
-
-                        GetRecyleListView(); break;
-                    }
-
-                case "收藏夹":
-                    {
-                        if (flag_pre_next == false)
-                        {
-                            accesspaths.Remove("收藏夹");
-                            accesspaths.Insert(0, "收藏夹");
-                        }
-
-                        GetfavoritesListViev(); break;
-                    }
-                default:
-                    {
-                        flag = GetFolderListview(newpath);
-                        if (flag_pre_next == false)
-                        {
-                            accesspaths.Remove(newpath);
-                            accesspaths.Insert(0, newpath);
-                        }
-
-                        break;
-                    }
-
-            }
-
-
-            if (flag_pre_next == false)//重新绑定combo_ur1
-            {
-                combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);//**** combo_url.DataSource = null;
-                combo_url.DataSource = accesspaths;
-                combo_url.SelectedIndex = 0;
-                combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);//wr
-            }
-            if (flag == 1)
-            {
-                listView1.Items.Clear();
-                MessageBox.Show("访问失败，缺少权限或设备未就绪", "错误");
-            }
-            flag_pre_next = false;
 
         }
     }
