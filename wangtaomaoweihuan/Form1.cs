@@ -117,6 +117,7 @@ namespace wangtaomaoweihuan
 
             treeView1.EndUpdate();
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
+            combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
         }
 
         private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
@@ -812,6 +813,108 @@ namespace wangtaomaoweihuan
                     break;
             }
         }
+        private void btn_pre_Click(object sender, EventArgs e)
+        {
+            //后退按钮
+            if (combo_url.SelectedIndex == combo_url.Items.Count - 1)
+            {
+                MessageBox.Show("已经是后退的最后一个目录了", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+            else
+            {
+                flag_pre_next = true;
+                combo_url.SelectedIndex += 1;
+            }
+
+
+        }
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+            //前进按钮
+           
+        }
+
+        private void combo_url_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int flag = 0;
+            string newpath = combo_url.Text.Trim();
+            switch (newpath)
+            {
+                case "桌面":
+                    // 如果不是前进或后退引起的地址变换，则把选中的路径调整到最新位置
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("点面");
+                            accesspaths.Insert(0, "桌面");
+                        }
+
+                        GetDesktopListview(); break;
+                    }
+                case "我的电脑":
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("我的电脑");
+                            accesspaths.Insert(0, "我的电脑");
+                        }
+
+                        GetDriveListview(); break;
+                    }
+
+                case "回收站"://回收站目前不提供还原功能
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("回收站");
+                            accesspaths.Insert(0, "回收站");
+                        }
+
+                        GetRecyleListView(); break;
+                    }
+
+                case "收藏夹":
+                    {
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove("收藏夹");
+                            accesspaths.Insert(0, "收藏夹");
+                        }
+
+                        GetfavoritesListViev(); break;
+                    }
+                default:
+                    {
+                        flag = GetFolderListview(newpath);
+                        if (flag_pre_next == false)
+                        {
+                            accesspaths.Remove(newpath);
+                            accesspaths.Insert(0, newpath);
+                        }
+
+                        break;
+                    }
+
+            }
+
+
+            if (flag_pre_next == false)//重新绑定combo_ur1
+            {
+                combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);//**** combo_url.DataSource = null;
+                combo_url.DataSource = accesspaths;
+                combo_url.SelectedIndex = 0;
+                combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);//wr
+            }
+            if (flag == 1)
+            {
+                listView1.Items.Clear();
+                MessageBox.Show("访问失败，缺少权限或设备未就绪", "错误");
+            }
+            flag_pre_next = false;
+
+        }
     }
+}
 
 }
