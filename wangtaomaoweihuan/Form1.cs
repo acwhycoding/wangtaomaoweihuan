@@ -242,61 +242,6 @@ namespace wangtaomaoweihuan
             GetDiverListview();
         }
 
-        private void GetDiverListview()
-        {
-            listView1.Items.Clear();
-            CreateCol_D();
-            DriveInfo[] drivers = DriveInfo.GetDrives();
-            string lvname1, lvname2, lvtype, keyname, lvtotal = "", lvfree = "";
-            foreach (DriveInfo driver in drivers)
-            {
-                ListViewItem newitem = new ListViewItem();
-                newitem.IndentCount = 1;
-                if (driver.IsReady) lvname1 = driver.VolumeLabel;
-                else lvname1 = "";
-                lvname2 = driver.Name;
-                switch (driver.DriveType)
-                {
-                    case DriveType.Fixed:
-                        keyname = "localdriver";
-                        lvtype = "本地磁盘";
-                        if (lvname1.Equals("")) lvname1 = "本地磁盘";
-                        newitem.Group = listView1.Groups["lvGroup1"];
-                        break;
-                    case DriveType.Removable:
-                        keyname = "movabledriver";
-                        lvtype = "移动储存";
-                        if (lvname1.Equals("")) lvname1 = "移动存储";
-                        newitem.Group = listView1.Groups["lvGroup2"];
-                        break;
-                    case DriveType.CDRom:
-                        keyname = "cdrom";
-                        lvtype = "光盘驱动器";
-                        if (lvname1.Equals("")) lvname1 = "光盘驱动器";
-                        newitem.Group = listView1.Groups["lvGroup3"];
-                        break;
-                    default:
-                        keyname = "movabledriver";
-                        lvtype = "未知设备";
-                        if (lvname1.Equals("")) lvname1 = "未知设备";
-                        newitem.Group = listView1.Groups["lvGroup4"];
-                        break;
-                }
-                newitem.SubItems[0].Text = (lvname1 + "(" + lvname2.Substring(0, 2) + ")");
-                newitem.SubItems.Add(lvtype);
-                if (driver.IsReady)
-                {
-                    lvtotal = Math.Round(driver.TotalSize / (1024 * 1024 * 1.0), 1).ToString() + "G";
-                    lvfree = Math.Round(driver.TotalFreeSpace / (1024 * 1024 * 1024 * 1.0), 1).ToString() + "G";
-                }
-                newitem.SubItems.Add(lvtotal);
-                newitem.SubItems.Add(lvfree);
-                newitem.ImageKey = keyname;
-                newitem.Tag = lvname2;
-                listView1.Items.Add(newitem);
-            }
-            lb_ojbnum.Text = listView1.Items.Count.ToString();
-        }
         private void CreateCol_F()
         {
             listView1.Columns.Clear();
@@ -384,7 +329,7 @@ namespace wangtaomaoweihuan
                     {
                         if (accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
                         accesspaths.Insert(0, "我的电脑");
-                        GetDriveListview(); break;
+                        GetDiverListview(); break;
                     }
                 case "回收站":
                     {
@@ -420,9 +365,60 @@ namespace wangtaomaoweihuan
 
         }
 
-        private void GetDriveListview()
+        private void GetDiverListview()
         {
-            throw new NotImplementedException();
+            listView1.Items.Clear();
+            CreateCol_D();
+            DriveInfo[] drivers = DriveInfo.GetDrives();
+            string lvname1, lvname2, lvtype, keyname, lvtotal = "", lvfree = "";
+            foreach (DriveInfo driver in drivers)
+            {
+                ListViewItem newitem = new ListViewItem();
+                newitem.IndentCount = 1;
+                if (driver.IsReady) lvname1 = driver.VolumeLabel;
+                else lvname1 = "";
+                lvname2 = driver.Name;
+                switch (driver.DriveType)
+                {
+                    case DriveType.Fixed:
+                        keyname = "localdriver";
+                        lvtype = "本地磁盘";
+                        if (lvname1.Equals("")) lvname1 = "本地磁盘";
+                        newitem.Group = listView1.Groups["lvGroup1"];
+                        break;
+                    case DriveType.Removable:
+                        keyname = "movabledriver";
+                        lvtype = "移动储存";
+                        if (lvname1.Equals("")) lvname1 = "移动存储";
+                        newitem.Group = listView1.Groups["lvGroup2"];
+                        break;
+                    case DriveType.CDRom:
+                        keyname = "cdrom";
+                        lvtype = "光盘驱动器";
+                        if (lvname1.Equals("")) lvname1 = "光盘驱动器";
+                        newitem.Group = listView1.Groups["lvGroup3"];
+                        break;
+                    default:
+                        keyname = "movabledriver";
+                        lvtype = "未知设备";
+                        if (lvname1.Equals("")) lvname1 = "未知设备";
+                        newitem.Group = listView1.Groups["lvGroup4"];
+                        break;
+                }
+                newitem.SubItems[0].Text = (lvname1 + "(" + lvname2.Substring(0, 2) + ")");
+                newitem.SubItems.Add(lvtype);
+                if (driver.IsReady)
+                {
+                    lvtotal = Math.Round(driver.TotalSize / (1024 * 1024 * 1.0), 1).ToString() + "G";
+                    lvfree = Math.Round(driver.TotalFreeSpace / (1024 * 1024 * 1024 * 1.0), 1).ToString() + "G";
+                }
+                newitem.SubItems.Add(lvtotal);
+                newitem.SubItems.Add(lvfree);
+                newitem.ImageKey = keyname;
+                newitem.Tag = lvname2;
+                listView1.Items.Add(newitem);
+            }
+            lb_ojbnum.Text = listView1.Items.Count.ToString();
         }
 
         private int GetFolderListview(string p)
@@ -782,7 +778,7 @@ namespace wangtaomaoweihuan
                     {
                         if(accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
                         accesspaths.Insert(0, "我的电脑");
-                        GetDriveListview();
+                        GetDiverListview();
 
                         combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
                         combo_url.DataSource = null;
@@ -862,7 +858,7 @@ namespace wangtaomaoweihuan
                             accesspaths.Insert(0, "我的电脑");
                         }
 
-                        GetDriveListview(); break;
+                        GetDiverListview(); break;
                     }
 
                 case "回收站"://回收站目前不提供还原功能
