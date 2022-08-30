@@ -1,4 +1,5 @@
 ﻿using JHR_GetIcon;
+using Shell32;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
@@ -117,6 +118,7 @@ namespace wangtaomaoweihuan
             treeView1.EndUpdate();
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
         }
+
         private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             TreeNode tn = treeView1.SelectedNode;
@@ -153,6 +155,7 @@ namespace wangtaomaoweihuan
 
             }
         }
+
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -170,11 +173,6 @@ namespace wangtaomaoweihuan
 
         private void 详细列表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {   
 
         }
 
@@ -296,7 +294,7 @@ namespace wangtaomaoweihuan
                 newitem.Tag = lvname2;
                 listView1.Items.Add(newitem);
             }
-            toolStripStatusLabel2.Text = listView1.Items.Count.ToString();
+            lb_ojbnum.Text = listView1.Items.Count.ToString();
         }
         private void CreateCol_F()
         {
@@ -391,7 +389,8 @@ namespace wangtaomaoweihuan
                     {
                         if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
                         accesspaths.Insert(0, "回收站");
-                        GetRecyleListView(); break;
+                        //GetRecyleListView();
+                        break;
                     }
                 case "收藏夹":
                     {
@@ -420,10 +419,15 @@ namespace wangtaomaoweihuan
 
         }
 
+        private void GetDriveListview()
+        {
+            throw new NotImplementedException();
+        }
+
         private int GetFolderListview(string p)
         {
             listView1.Items.Clear();
-            CreateCol_F;
+            CreateCol_F();
             string[] dirs;
             string[] files;
             try
@@ -441,13 +445,13 @@ namespace wangtaomaoweihuan
                 try
                 {
                     DirectoryInfo dinfo = new DirectoryInfo(dir);
-                    lv = new ListViewItem(dinfo.Name);
+                    ListViewItem lv = new ListViewItem(dinfo.Name);
                     lv.Tag = dinfo.FullName;
-                    lv.InageKey = "defaultfolder";
-                    lv.SubItens.Add(dinfo.LastWriteTime.ToString());//修改时间
-                    lv.SubItens.Add("文件夹");//类型
-                    lv.SubItens.Add("");//大小
-                    lv.SubItens.Add(dinfo.CreationTime.ToString());//创建时间
+                    lv.ImageKey = "defaultfolder";
+                    lv.SubItems.Add(dinfo.LastWriteTime.ToString());//修改时间
+                    lv.SubItems.Add("文件夹");//类型
+                    lv.SubItems.Add("");//大小
+                    lv.SubItems.Add(dinfo.CreationTime.ToString());//创建时间
                     listView1.Items.Add(lv);
                 }
                 catch { }
@@ -457,9 +461,9 @@ namespace wangtaomaoweihuan
                 try
                 {
                     FileInfo finfo = new FileInfo(f);
-                    lv = new ListViewItem(finfo.Name);//名称
+                    ListViewItem lv = new ListViewItem(finfo.Name);//名称
                     lv.Tag = finfo.FullName;
-                    lv.InageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标
+                    lv.ImageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标
                     lv.SubItems.Add(finfo.LastWriteTime.ToString());//修改时间
                     string typenane = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称lv.SubItens.Add(typename)://类型
                     long size = finfo.Length;
@@ -556,7 +560,7 @@ namespace wangtaomaoweihuan
                     lv.ImageKey = GetFileIconKey(f.Path.Substring(f.Path.LastIndexOf('.')), f.Path);
                     lv.SubItems.Add(f.Type);
                     lv.SubItems.Add(f.Path);
-                    lv.SubItems.Add(f.ModifyDate.ToStringO);
+                    lv.SubItems.Add(f.ModifyDate.ToString());
                     listView1.Items.Add(lv);
                 }
                 lb_ojbnum.Text = listView1.Items.Count.ToString();
@@ -731,6 +735,10 @@ namespace wangtaomaoweihuan
             return imgkey;
         }
 
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
