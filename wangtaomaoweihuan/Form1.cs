@@ -36,30 +36,7 @@ namespace wangtaomaoweihuan
                 imageList1.Images.Add(mykeys[i], myIcon[0]);
                 imageList2.Images.Add(mykeys[i], myIcon[1]);
             }
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void 详细列表ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {   //初始化树形目录
+            //初始化树形目录
             treeView1.ImageList = imageList1;
             treeView1.BeginUpdate();
             treeView1.Nodes.Clear();
@@ -138,6 +115,30 @@ namespace wangtaomaoweihuan
             treeView1.Nodes.Add(tnr);
 
             treeView1.EndUpdate();
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 详细列表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {   
 
         }
 
@@ -187,7 +188,7 @@ namespace wangtaomaoweihuan
                     }
                     catch { }
                 }
-                rootNodes.Add(tn);
+                root.Nodes.Add(tn);
             }
         }
 
@@ -259,7 +260,7 @@ namespace wangtaomaoweihuan
                 newitem.Tag = lvname2;
                 listView1.Items.Add(newitem);
             }
-            lb_objnum.Text = listView1.Items.Count.ToString();
+            toolStripStatusLabel2.Text = listView1.Items.Count.ToString();
         }
         private void CreateCol_F()
         {
@@ -333,5 +334,5 @@ namespace wangtaomaoweihuan
             listView1.Columns.Add(columnHeader1);
         }
     }
-    
+   
 }

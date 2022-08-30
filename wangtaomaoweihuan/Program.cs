@@ -16,11 +16,7 @@ namespace wangtaomaoweihuan
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< HEAD
-            Application.Run(new GetIconByFileName());
-=======
             Application.Run(new Form1());
->>>>>>> 35f13cb1d9bab82b84a0801561ed389d124df459
         }
     }
 }
