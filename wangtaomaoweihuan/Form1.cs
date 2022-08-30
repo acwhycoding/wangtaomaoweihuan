@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JHR_GetIcon;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,31 +13,31 @@ using System.Windows.Forms;
 
 namespace wangtaomaoweihuan
 {
-    public partial class form1 : Form
+    public partial class Form1 : Form
     {
-        public form1()
+        ArrayList accesspaths = new ArrayList();
+        Icon[] myIcon;
+        public Form1()
         {
             InitializeComponent();
-            ArrayList accesspaths = new ArrayList();
-            GetIcon getIcon = new GetIcon;
+           
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            GetIcon getIcon = new GetIcon();
             Icon[] myIcon;
             int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
 
             string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
-            
-            for(int i=0;i<myindexs.Length;i++)
+
+            for (int i = 0; i < myindexs.Length; i++)
             {
-                myIcon = getIcon.GetIcon(myindexs[i]);
-                imageList1.Images.Add(mykeys[i],myIcon[0]);
+                myIcon = getIcon.GetIconByIndex(myindexs[i]);
+                imageList1.Images.Add(mykeys[i], myIcon[0]);
                 imageList2.Images.Add(mykeys[i], myIcon[1]);
 
             }
-        }
-        GetIconByFileName(string fileName, FileAttributes att);
-
-        private void 资源管理器_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -53,7 +55,7 @@ namespace wangtaomaoweihuan
 
         }
 
-        private void 详细liebiaoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 详细列表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -89,7 +91,7 @@ namespace wangtaomaoweihuan
             //在收藏夹下节点添加：我的文件，我的图片，我的音乐，我的视频
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             TreeNode tnl = new TreeNode("我的文档");
-            myIcon = geticon,GetIconbyFileName(mypath, FileAttributes.Directory);
+            myIcon = geticon.GetIconbyFileName(mypath, FileAttributes.Directory);
             imageList1.Images.Add("mydocument",myIcon[0]);
             imageList2.Images.Add("mydocument", myIcon[1]);
             tnl.SelectedImageKey = tnl.ImageKey = "mydocument";
@@ -97,8 +99,53 @@ namespace wangtaomaoweihuan
             tnf.Nodes.Add(tnl);
 
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+            tnl = new TreeNode("我的音乐");
+            myIcon = geticon.GetIconByFileName(mypath, FileAttribute.Directory);
+            if(myIcon != null)
+            {
+                imageList1.Images.Add("mymusic",myIcon[0]);
+                imageList2.Images.Add("mymusic",myIcon[1]);
+                tnl.SelectedImageKey = tnl.ImageKey = "mymusic";
+                tnl.Tag= mypath;
+                tnl.Nodes.Add(tnl);
+            }
 
+            mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            tnl = new TreeNode("我的图片");
+            myIcon = geticon.GetIconByFileName(mypath, FileAttribute.Directory);
+            if (myIcon != null)
+            {
+                imageList1.Images.Add("mypictures", myIcon[0]);
+                imageList2.Images.Add("mypictures", myIcon[1]);
+                tnl.SelectedImageKey = tnl.ImageKey = "mypicture";
+                tnl.Tag = mypath;
+                tnl.Nodes.Add(tnl);
+            }
 
+            mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            tnl = new TreeNode("我的视频");
+            myIcon = geticon.GetIconByFileName(mypath, FileAttribute.Directory);
+            if (myIcon != null)
+            {
+                imageList1.Images.Add("myvideos", myIcon[0]);
+                imageList2.Images.Add("myvideos", myIcon[1]);
+                tnl.SelectedImageKey = tnl.ImageKey = "myvideos";
+                tnl.Tag = mypath;
+                tnl.Nodes.Add(tnl);
+            }
+            mypath = "recycle";
+            TreeNode tnr = new TreeNode("回收站");
+            tnr.SelectedImageKey = tnr.ImageKey = "recycle";
+            tnr.Tag = mypath;
+            treeView1.Nodes.Add(tnr);
+
+            treeView1.EndUpdate();
+
+        }
+
+        private void GetDriverTree(TreeNode root)
+        {
+            throw new NotImplementedException();
         }
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
@@ -109,6 +156,16 @@ namespace wangtaomaoweihuan
         private void splitContainer1_Panel2_SizeChanged(object sender, EventArgs e)
         {
             text_search.Width=splitContainer1.Panel2.Width-btn_search.Width-6;
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetDiverListview();
+        }
+
+        private void GetDiverListview()
+        {
+            throw new NotImplementedException();
         }
     }
 }
