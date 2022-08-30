@@ -94,7 +94,7 @@ namespace wangtaomaoweihuan
                 imageList2.Images.Add("mypictures", myIcon[1]);
                 tnl.SelectedImageKey = tnl.ImageKey = "mypicture";
                 tnl.Tag = mypath;
-                tnfl.Nodes.Add(tnl);
+                tnf.Nodes.Add(tnl);
             }
 
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
