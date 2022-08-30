@@ -1,9 +1,11 @@
-﻿using System;
+﻿using JHR_GetIcon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,31 +13,30 @@ using System.Windows.Forms;
 
 namespace wangtaomaoweihuan
 {
-    public partial class form1 : Form
+    public partial class Form1 : Form
     {
-        public form1()
+        ArrayList accesspaths = new ArrayList();
+        private object getIcon;
+
+        public Form1()
         {
             InitializeComponent();
-            ArrayList accesspaths = new ArrayList();
-            GetIcon getIcon = new GetIcon;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            GetIcon getIcon = new GetIcon();
             Icon[] myIcon;
             int[] myindexs = { 15, 34, 43, 8, 11, 7, 101, 4, 2, 0, 16, 17 };
 
             string[] mykeys = { "computer", "desktop", "favorites", "localdriver", "cdrom", "movabledriver", "recycle", "defaultfolder", "defaultexeicon", "unkonwicon", "printer", "network" };
-            
-            for(int i=0;i<myindexs.Length;i++)
+
+            for (int i = 0; i < myindexs.Length; i++)
             {
-                myIcon = getIcon.GetIcon(myindexs[i]);
-                imageList1.Images.Add(mykeys[i],myIcon[0]);
+                myIcon = getIcon.GetIconByIndex(myindexs[i]);
+                imageList1.Images.Add(mykeys[i], myIcon[0]);
                 imageList2.Images.Add(mykeys[i], myIcon[1]);
-
             }
-        }
-        GetIconByFileName(string fileName, FileAttributes att);
-
-        private void 资源管理器_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -89,7 +90,7 @@ namespace wangtaomaoweihuan
             //在收藏夹下节点添加：我的文件，我的图片，我的音乐，我的视频
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             TreeNode tnl = new TreeNode("我的文档");
-            myIcon = geticon,GetIconbyFileName(mypath, FileAttributes.Directory);
+            myIcon = geticon.GetIconbyFileName(mypath, FileAttributes.Directory);
             imageList1.Images.Add("mydocument",myIcon[0]);
             imageList2.Images.Add("mydocument", myIcon[1]);
             tnl.SelectedImageKey = tnl.ImageKey = "mydocument";
@@ -98,7 +99,35 @@ namespace wangtaomaoweihuan
 
             mypath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
 
+        }
 
+        private void GetDriverTree(TreeNode root)
+        {
+            DriveInfo[] drivers = DriveInfo.GetDrives();
+            string keyname = "";
+            string drivername = "";
+            string drivertag = "";
+            foreach(DriveInfo driver in drivers)
+            {
+                if (driver.IsReady) drivername = driver.VolumeLabel;
+                else drivername = "";
+                switch (driver.DriveType)
+                {
+                    case DriveType.Fixed: 
+                        keyname = "localdriver";
+                        if (drivername.Equals("")) drivername = "本地磁盘";
+                    case DriveType.Removable: 
+                        keyname = "movabledriver";
+                        if (drivername.Equals("")) drivername = "移动存储";
+                    case DriveType.CDRom: 
+                        keyname = "cdrom";
+                        if (drivername.Equals("")) drivername = "光盘驱动器";
+                    default:
+                        keyname = "movabledriver";
+                        if (drivername.Equals("")) drivername = "未知设备";
+                }
+            }
+            throw new NotImplementedException();
         }
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
