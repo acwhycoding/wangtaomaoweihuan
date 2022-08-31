@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("硬盘", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("移动储存", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("其他", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("硬盘", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("移动储存", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("其他", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.combo_url = new System.Windows.Forms.ComboBox();
             this.btn_next = new System.Windows.Forms.PictureBox();
@@ -211,37 +211,37 @@
             // 复制ToolStripMenuItem
             // 
             this.复制ToolStripMenuItem.Name = "复制ToolStripMenuItem";
-            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
+            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.复制ToolStripMenuItem.Text = "复制";
             // 
             // 剪切ToolStripMenuItem
             // 
             this.剪切ToolStripMenuItem.Name = "剪切ToolStripMenuItem";
-            this.剪切ToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
+            this.剪切ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.剪切ToolStripMenuItem.Text = "剪切";
             // 
             // 粘贴ToolStripMenuItem
             // 
             this.粘贴ToolStripMenuItem.Name = "粘贴ToolStripMenuItem";
-            this.粘贴ToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
+            this.粘贴ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.粘贴ToolStripMenuItem.Text = "粘贴";
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.删除ToolStripMenuItem.Text = "删除";
             // 
             // 重命名ToolStripMenuItem
             // 
             this.重命名ToolStripMenuItem.Name = "重命名ToolStripMenuItem";
-            this.重命名ToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
+            this.重命名ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.重命名ToolStripMenuItem.Text = "重命名";
             // 
             // 属性ToolStripMenuItem
             // 
             this.属性ToolStripMenuItem.Name = "属性ToolStripMenuItem";
-            this.属性ToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
+            this.属性ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.属性ToolStripMenuItem.Text = "属性";
             // 
             // toolStripButton1
@@ -293,32 +293,32 @@
             // 大图标ToolStripMenuItem
             // 
             this.大图标ToolStripMenuItem.Name = "大图标ToolStripMenuItem";
-            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.大图标ToolStripMenuItem.Text = "大图标";
             // 
             // 小图标ToolStripMenuItem
             // 
             this.小图标ToolStripMenuItem.Name = "小图标ToolStripMenuItem";
-            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.小图标ToolStripMenuItem.Text = "小图标";
             // 
             // 列表ToolStripMenuItem
             // 
             this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
-            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.列表ToolStripMenuItem.Text = "列表";
             // 
             // 详细列表ToolStripMenuItem
             // 
             this.详细列表ToolStripMenuItem.Name = "详细列表ToolStripMenuItem";
-            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.详细列表ToolStripMenuItem.Text = "详细列表";
             this.详细列表ToolStripMenuItem.Click += new System.EventHandler(this.详细列表ToolStripMenuItem_Click);
             // 
             // 详细大图标ToolStripMenuItem
             // 
             this.详细大图标ToolStripMenuItem.Name = "详细大图标ToolStripMenuItem";
-            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.详细大图标ToolStripMenuItem.Text = "详细大图标";
             // 
             // statusStrip1
@@ -328,9 +328,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lb_ojbnum});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 425);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1033, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1033, 26);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -363,7 +363,7 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer2.Panel2.Controls.Add(this.listView1);
-            this.splitContainer2.Size = new System.Drawing.Size(1033, 358);
+            this.splitContainer2.Size = new System.Drawing.Size(1033, 357);
             this.splitContainer2.SplitterDistance = 171;
             this.splitContainer2.TabIndex = 3;
             // 
@@ -374,10 +374,10 @@
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(171, 358);
+            this.treeView1.Size = new System.Drawing.Size(171, 357);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
             // listView1
             // 
@@ -389,24 +389,24 @@
             this.ch_totale,
             this.ch_avail});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup1.Header = "硬盘";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "移动储存";
-            listViewGroup2.Name = "listViewGroup2";
-            listViewGroup3.Header = "其他";
-            listViewGroup3.Name = "listViewGroup3";
-            listViewGroup4.Header = "ListViewGroup";
-            listViewGroup4.Name = "listViewGroup4";
+            listViewGroup5.Header = "硬盘";
+            listViewGroup5.Name = "listViewGroup1";
+            listViewGroup6.Header = "移动储存";
+            listViewGroup6.Name = "listViewGroup2";
+            listViewGroup7.Header = "其他";
+            listViewGroup7.Name = "listViewGroup3";
+            listViewGroup8.Header = "ListViewGroup";
+            listViewGroup8.Name = "listViewGroup4";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4});
+            listViewGroup5,
+            listViewGroup6,
+            listViewGroup7,
+            listViewGroup8});
             this.listView1.HideSelection = false;
             this.listView1.LargeImageList = this.imageList2;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(858, 358);
+            this.listView1.Size = new System.Drawing.Size(858, 357);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -515,35 +515,35 @@
             // item_newfolder
             // 
             this.item_newfolder.Name = "item_newfolder";
-            this.item_newfolder.Size = new System.Drawing.Size(182, 26);
+            this.item_newfolder.Size = new System.Drawing.Size(190, 26);
             this.item_newfolder.Text = "文件夹";
             this.item_newfolder.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newtxt
             // 
             this.item_newtxt.Name = "item_newtxt";
-            this.item_newtxt.Size = new System.Drawing.Size(182, 26);
+            this.item_newtxt.Size = new System.Drawing.Size(190, 26);
             this.item_newtxt.Text = "文本文档";
             this.item_newtxt.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newword
             // 
             this.item_newword.Name = "item_newword";
-            this.item_newword.Size = new System.Drawing.Size(182, 26);
+            this.item_newword.Size = new System.Drawing.Size(190, 26);
             this.item_newword.Text = "word文档";
             this.item_newword.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newexcel
             // 
             this.item_newexcel.Name = "item_newexcel";
-            this.item_newexcel.Size = new System.Drawing.Size(182, 26);
+            this.item_newexcel.Size = new System.Drawing.Size(190, 26);
             this.item_newexcel.Text = "excel电子表格";
             this.item_newexcel.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newppt
             // 
             this.item_newppt.Name = "item_newppt";
-            this.item_newppt.Size = new System.Drawing.Size(182, 26);
+            this.item_newppt.Size = new System.Drawing.Size(190, 26);
             this.item_newppt.Text = "PPT演示文档";
             this.item_newppt.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 

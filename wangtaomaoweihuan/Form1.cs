@@ -375,55 +375,7 @@ namespace wangtaomaoweihuan
         }
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode tn = e.Node;
-            int flag = 0;
-            switch (tn.Text)
-            {
-                case "桌面":
-                    {
-                        if (accesspaths.IndexOf("桌面") > -1) accesspaths.Remove("桌面");
-                        accesspaths.Insert(0, "桌面");
-                        GetDesktopListview(); break;
-                    }
-                case "我的电脑":
-                    {
-                        if (accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
-                        accesspaths.Insert(0, "我的电脑");
-                        GetDriverListview(); break;
-                    }
-                case "回收站":
-                    {
-                        if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
-                        accesspaths.Insert(0, "回收站");
-                        GetRecycleListView();
-                        break;
-                    }
-                case "收藏夹":
-                    {
-                        if (accesspaths.IndexOf("收藏夹") > -1) accesspaths.Remove("收藏夹");
-                        accesspaths.Insert(0, "收藏夹");
-                        GetfavoritesListViev(); break;
-                    }
-                default:
-                    {
-                        flag = GetFolderListview(tn.Tag.ToString());
-                        if (flag == 0)
-                        {
-                            if (accesspaths.IndexOf(tn.Tag.ToString()) > -1) accesspaths.Remove(tn.Tag.ToString());
-                            accesspaths.Insert(0, tn.Tag.ToString());
-                        }
-                        break;
-                    }
-            }
-            if (flag == 0)
-            {
-                combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
-                combo_url.DataSource = null;
-                combo_url.DataSource = accesspaths;
-                combo_url.SelectedIndex = 0;
-                combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
-            }
-            else MessageBox.Show("访问失败，缺少权限或设备未就绪", "错误");
+            
 
         }
 
@@ -470,7 +422,8 @@ namespace wangtaomaoweihuan
                     ListViewItem lv = new ListViewItem(finfo.Name);//名称
                     lv.Tag = finfo.FullName;
                     lv.ImageKey = GetFileIconKey(finfo.Extension, finfo.FullName);//根据扩展名提取图标
-                    string typenane = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称lv.SubItens.Add(typename)://类型
+                    string typename = getIcon.GetTypeName(finfo.FullName);//获取文件类型名称
+                    lv.SubItems.Add(typename);//类型
                     long size = finfo.Length;
                     lv.SubItems.Add(finfo.LastWriteTime.ToString());//修改时间
                     
@@ -1383,7 +1336,8 @@ namespace wangtaomaoweihuan
 
             if (flag_pre_next == false)//重新绑定combo_ur1
             {
-                combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);//**** combo_url.DataSource = null;
+                combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);//****
+                combo_url.DataSource = null;
                 combo_url.DataSource = accesspaths;
                 combo_url.SelectedIndex = 0;
                 combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);//wr
@@ -1401,11 +1355,11 @@ namespace wangtaomaoweihuan
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             string currpath = combo_url.Text;
-            //string t = "";
+ 
             switch (currpath)
             {
                 case "桌面":
-                    break;
+                    return;
                 case "回收站": combo_url.Text = "桌面"; break;
                 case "我的电脑": combo_url.Text = "桌面"; break;
                 case "收藏夹": combo_url.Text = "桌面"; break;
@@ -1421,7 +1375,7 @@ namespace wangtaomaoweihuan
                     {
                         try
                         {
-                            combo_url.Text = Directory.GetParent(currpath).FullName;
+                            combo_url.Text = Directory.GetParent(currpath).FullName.ToString();
                         }
                         catch
                         {
@@ -1431,11 +1385,7 @@ namespace wangtaomaoweihuan
                     }
 
             }
-            combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
-            combo_url.DataSource = null;
-            combo_url.DataSource = accesspaths;
-            combo_url.SelectedIndex = 0;
-            combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
+           
             combo_url_SelectedIndexChanged(null, null);
 
         }
@@ -1575,6 +1525,59 @@ namespace wangtaomaoweihuan
                     return tempInt;
                 }
             }
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode tn = e.Node;
+            int flag = 0;
+            switch (tn.Text)
+            {
+                case "桌面":
+                    {
+                        if (accesspaths.IndexOf("桌面") > -1) accesspaths.Remove("桌面");
+                        accesspaths.Insert(0, "桌面");
+                        GetDesktopListview(); break;
+                    }
+                case "我的电脑":
+                    {
+                        if (accesspaths.IndexOf("我的电脑") > -1) accesspaths.Remove("我的电脑");
+                        accesspaths.Insert(0, "我的电脑");
+                        GetDriverListview(); break;
+                    }
+                case "回收站":
+                    {
+                        if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
+                        accesspaths.Insert(0, "回收站");
+                        GetRecycleListView();
+                        break;
+                    }
+                case "收藏夹":
+                    {
+                        if (accesspaths.IndexOf("收藏夹") > -1) accesspaths.Remove("收藏夹");
+                        accesspaths.Insert(0, "收藏夹");
+                        GetfavoritesListViev(); break;
+                    }
+                default:
+                    {
+                        flag = GetFolderListview(tn.Tag.ToString());
+                        if (flag == 0)
+                        {
+                            if (accesspaths.IndexOf(tn.Tag.ToString()) > -1) accesspaths.Remove(tn.Tag.ToString());
+                            accesspaths.Insert(0, tn.Tag.ToString());
+                        }
+                        break;
+                    }
+            }
+            if (flag == 0)
+            {
+                combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
+                combo_url.DataSource = null;
+                combo_url.DataSource = accesspaths;
+                combo_url.SelectedIndex = 0;
+                combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
+            }
+            else MessageBox.Show("访问失败，缺少权限或设备未就绪", "错误");
         }
     }
 
