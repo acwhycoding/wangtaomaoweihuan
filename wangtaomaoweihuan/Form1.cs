@@ -883,33 +883,33 @@ namespace wangtaomaoweihuan
 
         private void contextMenu_lv_Opening(object sender, CancelEventArgs e)
         {
-            string currpath = combo_url.Text;
-
-            switch (currpath)
+            //复制，剪切，粘贴，删除，重命名，新建，刷新，属性
+            if (listView1.SelectedItems.Count == 0)//右键位置是1istview1的空白处
             {
-                case "桌面":
-                    return;
-                case "回收站": combo_url.Text = "桌面"; break;
-                case "我的电脑": combo_url.Text = "桌面"; break;
-                case "收藏夹": combo_url.Text = "桌面"; break;
-                default:
-                    {
-                        try
-                        {
-                            combo_url.Text = Directory.GetParent(currpath).FullName;
-                        }
+                contextMenu_lv.Items["item_copy"].Enabled = false;
+                contextMenu_lv.Items["item_cut"].Enabled = false;
+                if (copyobj.Count == 0) contextMenu_lv.Items["item_paste"].Enabled = false;
+                else contextMenu_lv.Items["item_paste"].Enabled = true;
 
-                        catch
-                        {
-                            combo_url.Text = "我的电脑";
-                        }
-                        break;
-                    }
-
+                contextMenu_lv.Items["item_delete"].Enabled = false;
+                contextMenu_lv.Items["item_rename"].Enabled = false;
+                contextMenu_lv.Items["item_new"].Enabled = true;
+                contextMenu_lv.Items["item_refresh"].Enabled = true;
+                contextMenu_lv.Items["item_attr"].Enabled = false;
             }
-            combo_url_SelectedIndexChanged(null, null);
-
+            else
+            {
+                contextMenu_lv.Items["item_copy"].Enabled = true;
+                contextMenu_lv.Items["item_cut"].Enabled = true;
+                contextMenu_lv.Items["item_paste"].Enabled = false;
+                contextMenu_lv.Items["item_delete"].Enabled = true;
+                contextMenu_lv.Items["item_rename"].Enabled = true;
+                contextMenu_lv.Items["item_new"].Enabled = false;
+                contextMenu_lv.Items["item_refresh"].Enabled = false;
+                contextMenu_lv.Items["item_attr"].Enabled = true;
+            }
         }
+
 
         private void contextMenu_lv2_Opening(object sender, CancelEventArgs e)
         {
@@ -1015,7 +1015,7 @@ namespace wangtaomaoweihuan
                 case "folder": newname = "新建文件夹"; break;
                 case "word": newname = "新建word文档"; newext = ".doc"; break;
                 case "txt": newname = "新建文本文档"; newext = ".txt"; break;
-                case "evcel": newname = "新建excel文档"; newext = ".xls"; break;
+                case "excel": newname = "新建excel文档"; newext = ".xls"; break;
                 case "ppt": newname = "新建演示文稿"; newext = ".ppt"; break;
             }
             try

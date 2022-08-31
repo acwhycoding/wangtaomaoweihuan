@@ -77,7 +77,7 @@
             this.item_rename = new System.Windows.Forms.ToolStripMenuItem();
             this.item_new = new System.Windows.Forms.ToolStripMenuItem();
             this.item_newfolder = new System.Windows.Forms.ToolStripMenuItem();
-            this.item_newtext = new System.Windows.Forms.ToolStripMenuItem();
+            this.item_newtxt = new System.Windows.Forms.ToolStripMenuItem();
             this.item_newword = new System.Windows.Forms.ToolStripMenuItem();
             this.item_newexcel = new System.Windows.Forms.ToolStripMenuItem();
             this.item_newppt = new System.Windows.Forms.ToolStripMenuItem();
@@ -287,6 +287,7 @@
             this.toolStripSplitButton3.Name = "toolStripSplitButton3";
             this.toolStripSplitButton3.Size = new System.Drawing.Size(39, 24);
             this.toolStripSplitButton3.Text = "图标";
+            this.toolStripSplitButton3.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButton3_DropDownItemClicked);
             // 
             // 大图标ToolStripMenuItem
             // 
@@ -457,93 +458,104 @@
             this.item_refresh,
             this.item_attr});
             this.contextMenu_lv.Name = "contextMenu_lv";
-            this.contextMenu_lv.Size = new System.Drawing.Size(146, 196);
+            this.contextMenu_lv.Size = new System.Drawing.Size(211, 224);
             this.contextMenu_lv.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_lv_Opening);
-            this.contextMenu_lv.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_copy
             // 
             this.item_copy.Name = "item_copy";
-            this.item_copy.Size = new System.Drawing.Size(145, 24);
+            this.item_copy.Size = new System.Drawing.Size(210, 24);
             this.item_copy.Text = "复制(C)";
+            this.item_copy.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_cut
             // 
             this.item_cut.Name = "item_cut";
-            this.item_cut.Size = new System.Drawing.Size(145, 24);
+            this.item_cut.Size = new System.Drawing.Size(210, 24);
             this.item_cut.Text = "剪切(X)";
+            this.item_cut.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_paste
             // 
             this.item_paste.Name = "item_paste";
-            this.item_paste.Size = new System.Drawing.Size(145, 24);
+            this.item_paste.Size = new System.Drawing.Size(210, 24);
             this.item_paste.Text = "粘贴(V)";
+            this.item_paste.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_delete
             // 
             this.item_delete.Name = "item_delete";
-            this.item_delete.Size = new System.Drawing.Size(145, 24);
+            this.item_delete.Size = new System.Drawing.Size(210, 24);
             this.item_delete.Text = "删除(DEL)";
+            this.item_delete.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_rename
             // 
             this.item_rename.Name = "item_rename";
-            this.item_rename.Size = new System.Drawing.Size(145, 24);
+            this.item_rename.Size = new System.Drawing.Size(210, 24);
             this.item_rename.Text = "重命名";
+            this.item_rename.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_new
             // 
             this.item_new.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.item_newfolder,
-            this.item_newtext,
+            this.item_newtxt,
             this.item_newword,
             this.item_newexcel,
             this.item_newppt});
             this.item_new.Name = "item_new";
-            this.item_new.Size = new System.Drawing.Size(145, 24);
+            this.item_new.Size = new System.Drawing.Size(210, 24);
             this.item_new.Text = "新建";
             // 
             // item_newfolder
             // 
             this.item_newfolder.Name = "item_newfolder";
-            this.item_newfolder.Size = new System.Drawing.Size(182, 26);
+            this.item_newfolder.Size = new System.Drawing.Size(216, 26);
             this.item_newfolder.Text = "文件夹";
+            this.item_newfolder.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
-            // item_newtext
+            // item_newtxt
             // 
-            this.item_newtext.Name = "item_newtext";
-            this.item_newtext.Size = new System.Drawing.Size(182, 26);
-            this.item_newtext.Text = "文本文档";
+            this.item_newtxt.Name = "item_newtxt";
+            this.item_newtxt.Size = new System.Drawing.Size(216, 26);
+            this.item_newtxt.Text = "文本文档";
+            this.item_newtxt.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newword
             // 
             this.item_newword.Name = "item_newword";
-            this.item_newword.Size = new System.Drawing.Size(182, 26);
+            this.item_newword.Size = new System.Drawing.Size(216, 26);
             this.item_newword.Text = "word文档";
+            this.item_newword.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newexcel
             // 
             this.item_newexcel.Name = "item_newexcel";
-            this.item_newexcel.Size = new System.Drawing.Size(182, 26);
+            this.item_newexcel.Size = new System.Drawing.Size(216, 26);
             this.item_newexcel.Text = "excel电子表格";
+            this.item_newexcel.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newppt
             // 
             this.item_newppt.Name = "item_newppt";
-            this.item_newppt.Size = new System.Drawing.Size(182, 26);
+            this.item_newppt.Size = new System.Drawing.Size(216, 26);
             this.item_newppt.Text = "PPT演示文档";
+            this.item_newppt.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_refresh
             // 
             this.item_refresh.Name = "item_refresh";
-            this.item_refresh.Size = new System.Drawing.Size(145, 24);
+            this.item_refresh.Size = new System.Drawing.Size(210, 24);
             this.item_refresh.Text = "刷新";
+            this.item_refresh.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_attr
             // 
             this.item_attr.Name = "item_attr";
-            this.item_attr.Size = new System.Drawing.Size(145, 24);
+            this.item_attr.Size = new System.Drawing.Size(210, 24);
             this.item_attr.Text = "属性";
+            this.item_attr.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // contextMenu_lv2
             // 
@@ -666,7 +678,7 @@
         private System.Windows.Forms.ToolStripMenuItem item_rename;
         private System.Windows.Forms.ToolStripMenuItem item_new;
         private System.Windows.Forms.ToolStripMenuItem item_newfolder;
-        private System.Windows.Forms.ToolStripMenuItem item_newtext;
+        private System.Windows.Forms.ToolStripMenuItem item_newtxt;
         private System.Windows.Forms.ToolStripMenuItem item_newword;
         private System.Windows.Forms.ToolStripMenuItem item_newexcel;
         private System.Windows.Forms.ToolStripMenuItem item_newppt;
