@@ -1025,6 +1025,8 @@ namespace wangtaomaoweihuan
         {
             string newname = "";
             string newext = "";
+            string tmp = combo_url.Text;
+            string path = combo_url.Text;
             switch (newtype)
             {
                 case "folder": newname = "新建文件夹"; break;
@@ -1033,16 +1035,23 @@ namespace wangtaomaoweihuan
                 case "excel": newname = "新建excel文档"; newext = ".xls"; break;
                 case "ppt": newname = "新建演示文稿"; newext = ".ppt"; break;
             }
+            switch(tmp)
+            {
+                case "桌面": path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); break;
+                case "我的电脑": path = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer); break;
+                case "我的文档": path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); break;
+                default: path = combo_url.Text; break;
+            }
             try
             {
                 if (newtype.Equals("folder"))
                 {
                     int i = 1;
                     string temp = newname;
-                    while (Directory.Exists(Path.Combine(combo_url.Text, newname))) newname = temp + i++.ToString() + newext;
-                    Directory.CreateDirectory(Path.Combine(combo_url.Text, newname));
+                    while (Directory.Exists(Path.Combine(path,newname))) newname = temp + i++.ToString() + newext;
+                    Directory.CreateDirectory(Path.Combine(path, newname));
                     ListViewItem lv = new ListViewItem(newname);
-                    lv.Tag = Path.Combine(combo_url.Text, newname);
+                    lv.Tag = Path.Combine(path, newname);
                     lv.ImageKey = "defaultfolder";
                     lv.IndentCount = 1;
                     lv.SubItems.Add(DateTime.Now.ToString());
@@ -1058,13 +1067,13 @@ namespace wangtaomaoweihuan
                     int i = 1;
                     string temp = newname;
                     newname += newext;
-                    while (File.Exists(Path.Combine(combo_url.Text, newname))) newname = temp + i++.ToString() + newext;
-                    File.Create(Path.Combine(combo_url.Text, newname));
+                    while (File.Exists(Path.Combine(path, newname))) newname = temp + i++.ToString() + newext;
+                    File.Create(Path.Combine(path, newname));
                     ListViewItem lv = new ListViewItem(newname);
-                    lv.Tag = Path.Combine(combo_url.Text, newname);
-                    lv.ImageKey = GetFileIconKey(newext, Path.Combine(combo_url.Text, newname));
+                    lv.Tag = Path.Combine(path, newname);
+                    lv.ImageKey = GetFileIconKey(newext, Path.Combine(path, newname));
                     lv.IndentCount = 1;
-                    string typename = getIcon.GetTypeName(Path.Combine(combo_url.Text, newname));
+                    string typename = getIcon.GetTypeName(Path.Combine(path, newname));
                     lv.SubItems.Add(typename);
                     lv.SubItems.Add(DateTime.Now.ToString());
                     lv.SubItems.Add("");
@@ -1077,6 +1086,7 @@ namespace wangtaomaoweihuan
             {
                 MessageBox.Show(ee.Message);
             }
+            //combo_url_SelectedIndexChanged(null, null);
         }
 
         private void showattr(ListViewItem v)
