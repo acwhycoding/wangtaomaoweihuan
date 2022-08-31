@@ -29,34 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("硬盘", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("移动储存", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("其他", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.combo_url = new System.Windows.Forms.ComboBox();
-            this.btn_next = new System.Windows.Forms.PictureBox();
-            this.btn_pre = new System.Windows.Forms.PictureBox();
-            this.btn_search = new System.Windows.Forms.PictureBox();
             this.lb_searching = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.剪切ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.粘贴ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.属性ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
-            this.大图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.小图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.详细列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.详细大图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lb_ojbnum = new System.Windows.Forms.ToolStripStatusLabel();
@@ -89,13 +70,29 @@
             this.item_revert = new System.Windows.Forms.ToolStripMenuItem();
             this.item_empty = new System.Windows.Forms.ToolStripMenuItem();
             this.item_del = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.剪切ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.粘贴ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.属性ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
+            this.大图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.小图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.详细列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.详细大图标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_next = new System.Windows.Forms.PictureBox();
+            this.btn_pre = new System.Windows.Forms.PictureBox();
+            this.btn_search = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_next)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pre)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_search)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -104,6 +101,9 @@
             this.splitContainer2.SuspendLayout();
             this.contextMenu_lv.SuspendLayout();
             this.contextMenu_lv2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_next)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pre)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_search)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -129,50 +129,20 @@
             this.splitContainer1.Panel2.SizeChanged += new System.EventHandler(this.splitContainer1_Panel2_SizeChanged);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(1033, 40);
-            this.splitContainer1.SplitterDistance = 604;
+            this.splitContainer1.SplitterDistance = 527;
             this.splitContainer1.TabIndex = 0;
             // 
             // combo_url
             // 
             this.combo_url.FormattingEnabled = true;
-            this.combo_url.Location = new System.Drawing.Point(96, 12);
+            this.combo_url.Location = new System.Drawing.Point(109, 10);
             this.combo_url.Name = "combo_url";
-            this.combo_url.Size = new System.Drawing.Size(505, 23);
+            this.combo_url.Size = new System.Drawing.Size(405, 23);
             this.combo_url.TabIndex = 2;
-            // 
-            // btn_next
-            // 
-            this.btn_next.Image = global::wangtaomaoweihuan.Properties.Resources.next4;
-            this.btn_next.Location = new System.Drawing.Point(50, 3);
-            this.btn_next.Name = "btn_next";
-            this.btn_next.Size = new System.Drawing.Size(40, 40);
-            this.btn_next.TabIndex = 1;
-            this.btn_next.TabStop = false;
-            this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
-            // 
-            // btn_pre
-            // 
-            this.btn_pre.Image = global::wangtaomaoweihuan.Properties.Resources.pre3;
-            this.btn_pre.Location = new System.Drawing.Point(4, 3);
-            this.btn_pre.Name = "btn_pre";
-            this.btn_pre.Size = new System.Drawing.Size(40, 40);
-            this.btn_pre.TabIndex = 0;
-            this.btn_pre.TabStop = false;
-            this.btn_pre.Click += new System.EventHandler(this.btn_pre_Click);
-            // 
-            // btn_search
-            // 
-            this.btn_search.Image = global::wangtaomaoweihuan.Properties.Resources.icon_search;
-            this.btn_search.Location = new System.Drawing.Point(377, 12);
-            this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(18, 20);
-            this.btn_search.TabIndex = 1;
-            this.btn_search.TabStop = false;
-            this.btn_search.DoubleClick += new System.EventHandler(this.btn_search_Click);
             // 
             // lb_searching
             // 
-            this.lb_searching.Location = new System.Drawing.Point(4, 12);
+            this.lb_searching.Location = new System.Drawing.Point(9, 9);
             this.lb_searching.Name = "lb_searching";
             this.lb_searching.Size = new System.Drawing.Size(367, 25);
             this.lb_searching.TabIndex = 0;
@@ -191,135 +161,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1033, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.复制ToolStripMenuItem,
-            this.剪切ToolStripMenuItem,
-            this.粘贴ToolStripMenuItem,
-            this.删除ToolStripMenuItem,
-            this.重命名ToolStripMenuItem,
-            this.属性ToolStripMenuItem});
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(58, 24);
-            this.toolStripSplitButton1.Text = "组织";
-            // 
-            // 复制ToolStripMenuItem
-            // 
-            this.复制ToolStripMenuItem.Name = "复制ToolStripMenuItem";
-            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.复制ToolStripMenuItem.Text = "复制";
-            // 
-            // 剪切ToolStripMenuItem
-            // 
-            this.剪切ToolStripMenuItem.Name = "剪切ToolStripMenuItem";
-            this.剪切ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.剪切ToolStripMenuItem.Text = "剪切";
-            // 
-            // 粘贴ToolStripMenuItem
-            // 
-            this.粘贴ToolStripMenuItem.Name = "粘贴ToolStripMenuItem";
-            this.粘贴ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.粘贴ToolStripMenuItem.Text = "粘贴";
-            // 
-            // 删除ToolStripMenuItem
-            // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.删除ToolStripMenuItem.Text = "删除";
-            // 
-            // 重命名ToolStripMenuItem
-            // 
-            this.重命名ToolStripMenuItem.Name = "重命名ToolStripMenuItem";
-            this.重命名ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.重命名ToolStripMenuItem.Text = "重命名";
-            // 
-            // 属性ToolStripMenuItem
-            // 
-            this.属性ToolStripMenuItem.Name = "属性ToolStripMenuItem";
-            this.属性ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.属性ToolStripMenuItem.Text = "属性";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(88, 24);
-            this.toolStripButton1.Text = "新建文件夹";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(43, 24);
-            this.toolStripButton3.Text = "刷新";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(88, 24);
-            this.toolStripButton2.Text = "返回上一级";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripSplitButton3
-            // 
-            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.大图标ToolStripMenuItem,
-            this.小图标ToolStripMenuItem,
-            this.列表ToolStripMenuItem,
-            this.详细列表ToolStripMenuItem,
-            this.详细大图标ToolStripMenuItem});
-            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
-            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
-            this.toolStripSplitButton3.Size = new System.Drawing.Size(39, 24);
-            this.toolStripSplitButton3.Text = "图标";
-            this.toolStripSplitButton3.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButton3_DropDownItemClicked);
-            // 
-            // 大图标ToolStripMenuItem
-            // 
-            this.大图标ToolStripMenuItem.Name = "大图标ToolStripMenuItem";
-            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
-            this.大图标ToolStripMenuItem.Text = "大图标";
-            // 
-            // 小图标ToolStripMenuItem
-            // 
-            this.小图标ToolStripMenuItem.Name = "小图标ToolStripMenuItem";
-            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
-            this.小图标ToolStripMenuItem.Text = "小图标";
-            // 
-            // 列表ToolStripMenuItem
-            // 
-            this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
-            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
-            this.列表ToolStripMenuItem.Text = "列表";
-            // 
-            // 详细列表ToolStripMenuItem
-            // 
-            this.详细列表ToolStripMenuItem.Name = "详细列表ToolStripMenuItem";
-            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
-            this.详细列表ToolStripMenuItem.Text = "详细列表";
-            this.详细列表ToolStripMenuItem.Click += new System.EventHandler(this.详细列表ToolStripMenuItem_Click);
-            // 
-            // 详细大图标ToolStripMenuItem
-            // 
-            this.详细大图标ToolStripMenuItem.Name = "详细大图标ToolStripMenuItem";
-            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
-            this.详细大图标ToolStripMenuItem.Text = "详细大图标";
             // 
             // statusStrip1
             // 
@@ -609,6 +450,170 @@
             this.item_del.Text = "删除";
             this.item_del.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.复制ToolStripMenuItem,
+            this.剪切ToolStripMenuItem,
+            this.粘贴ToolStripMenuItem,
+            this.删除ToolStripMenuItem,
+            this.重命名ToolStripMenuItem,
+            this.属性ToolStripMenuItem});
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(58, 24);
+            this.toolStripSplitButton1.Text = "组织";
+            // 
+            // 复制ToolStripMenuItem
+            // 
+            this.复制ToolStripMenuItem.Name = "复制ToolStripMenuItem";
+            this.复制ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.复制ToolStripMenuItem.Text = "复制";
+            // 
+            // 剪切ToolStripMenuItem
+            // 
+            this.剪切ToolStripMenuItem.Name = "剪切ToolStripMenuItem";
+            this.剪切ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.剪切ToolStripMenuItem.Text = "剪切";
+            // 
+            // 粘贴ToolStripMenuItem
+            // 
+            this.粘贴ToolStripMenuItem.Name = "粘贴ToolStripMenuItem";
+            this.粘贴ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.粘贴ToolStripMenuItem.Text = "粘贴";
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.删除ToolStripMenuItem.Text = "删除";
+            // 
+            // 重命名ToolStripMenuItem
+            // 
+            this.重命名ToolStripMenuItem.Name = "重命名ToolStripMenuItem";
+            this.重命名ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.重命名ToolStripMenuItem.Text = "重命名";
+            // 
+            // 属性ToolStripMenuItem
+            // 
+            this.属性ToolStripMenuItem.Name = "属性ToolStripMenuItem";
+            this.属性ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.属性ToolStripMenuItem.Text = "属性";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(88, 24);
+            this.toolStripButton1.Text = "新建文件夹";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(43, 24);
+            this.toolStripButton3.Text = "刷新";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(88, 24);
+            this.toolStripButton2.Text = "返回上一级";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // toolStripSplitButton3
+            // 
+            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.大图标ToolStripMenuItem,
+            this.小图标ToolStripMenuItem,
+            this.列表ToolStripMenuItem,
+            this.详细列表ToolStripMenuItem,
+            this.详细大图标ToolStripMenuItem});
+            this.toolStripSplitButton3.Image = global::wangtaomaoweihuan.Properties.Resources.照片_pic;
+            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
+            this.toolStripSplitButton3.Size = new System.Drawing.Size(39, 24);
+            this.toolStripSplitButton3.Text = "图标";
+            this.toolStripSplitButton3.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButton3_DropDownItemClicked);
+            // 
+            // 大图标ToolStripMenuItem
+            // 
+            this.大图标ToolStripMenuItem.Name = "大图标ToolStripMenuItem";
+            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.大图标ToolStripMenuItem.Text = "大图标";
+            // 
+            // 小图标ToolStripMenuItem
+            // 
+            this.小图标ToolStripMenuItem.Name = "小图标ToolStripMenuItem";
+            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.小图标ToolStripMenuItem.Text = "小图标";
+            // 
+            // 列表ToolStripMenuItem
+            // 
+            this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
+            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.列表ToolStripMenuItem.Text = "列表";
+            // 
+            // 详细列表ToolStripMenuItem
+            // 
+            this.详细列表ToolStripMenuItem.Name = "详细列表ToolStripMenuItem";
+            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.详细列表ToolStripMenuItem.Text = "详细列表";
+            this.详细列表ToolStripMenuItem.Click += new System.EventHandler(this.详细列表ToolStripMenuItem_Click);
+            // 
+            // 详细大图标ToolStripMenuItem
+            // 
+            this.详细大图标ToolStripMenuItem.Name = "详细大图标ToolStripMenuItem";
+            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.详细大图标ToolStripMenuItem.Text = "详细大图标";
+            // 
+            // btn_next
+            // 
+            this.btn_next.Image = global::wangtaomaoweihuan.Properties.Resources.next4;
+            this.btn_next.Location = new System.Drawing.Point(53, 3);
+            this.btn_next.Name = "btn_next";
+            this.btn_next.Size = new System.Drawing.Size(35, 35);
+            this.btn_next.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_next.TabIndex = 1;
+            this.btn_next.TabStop = false;
+            this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
+            // 
+            // btn_pre
+            // 
+            this.btn_pre.Image = global::wangtaomaoweihuan.Properties.Resources.pre3;
+            this.btn_pre.Location = new System.Drawing.Point(12, 3);
+            this.btn_pre.Name = "btn_pre";
+            this.btn_pre.Size = new System.Drawing.Size(35, 35);
+            this.btn_pre.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_pre.TabIndex = 0;
+            this.btn_pre.TabStop = false;
+            this.btn_pre.Click += new System.EventHandler(this.btn_pre_Click);
+            // 
+            // btn_search
+            // 
+            this.btn_search.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_search.Image = global::wangtaomaoweihuan.Properties.Resources.搜索_search;
+            this.btn_search.Location = new System.Drawing.Point(472, 0);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            this.btn_search.Size = new System.Drawing.Size(30, 40);
+            this.btn_search.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_search.TabIndex = 1;
+            this.btn_search.TabStop = false;
+            this.btn_search.DoubleClick += new System.EventHandler(this.btn_search_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -626,9 +631,6 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btn_next)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pre)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_search)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -639,6 +641,9 @@
             this.splitContainer2.ResumeLayout(false);
             this.contextMenu_lv.ResumeLayout(false);
             this.contextMenu_lv2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_next)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pre)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_search)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
