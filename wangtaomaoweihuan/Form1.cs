@@ -563,11 +563,11 @@ namespace wangtaomaoweihuan
                 else
                 {
                     lv.ImageKey = GetFileIconKey(f.Path.Substring(f.Path.LastIndexOf('.')), f.Path);
-                    lv.SubItems.Add(f.Type);
-                    lv.SubItems.Add(f.Path);
-                    lv.SubItems.Add(f.ModifyDate.ToString());
-                    listView1.Items.Add(lv);
                 }
+                lv.SubItems.Add(f.Type);
+                lv.SubItems.Add(f.Path);
+                lv.SubItems.Add(f.ModifyDate.ToString());
+                listView1.Items.Add(lv);
                 lb_ojbnum.Text = listView1.Items.Count.ToString();
             }
         }
@@ -956,17 +956,16 @@ namespace wangtaomaoweihuan
                     string fullname = listView1.Items[i].Tag.ToString();
                     if (File.Exists(fullname))
                     {
-                        FileSystem.DeleteDirectory(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                        FileSystem.DeleteFile(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
                     }
-                    else
-                        if (Directory.Exists(fullname))
+                    else if (Directory.Exists(fullname))
                         FileSystem.DeleteDirectory(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
                     else MessageBox.Show(fullname + "，删除失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                MessageBox.Show(ee.Message);
             }
             combo_url_SelectedIndexChanged(null, null);
         }
@@ -1003,7 +1002,7 @@ namespace wangtaomaoweihuan
 
         private void OpenObj(ListViewItem listViewItem)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void donew(string newtype)
@@ -1066,7 +1065,15 @@ namespace wangtaomaoweihuan
 
         private void showattr(string v)
         {
-            throw new NotImplementedException();
+            if(Directory.Exists(v))
+            {
+                DirectoryInfo dif = new DirectoryInfo(v);
+            }
+            if(File.Exists(v))
+            {
+               FileInfo dif = new FileInfo(v);
+            }
+            return;
         }
 
         private void dorename()
@@ -1106,8 +1113,9 @@ namespace wangtaomaoweihuan
         {
             string currpath = combo_url.Text;
             if (currpath.Equals("桌面")) currpath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            Console.WriteLine(copyobj.Count);
             //如果复制对象数为0，或目录不存在，或源目录和目的目录相同，则返回
-            if (copyobj.Count == 0 || Directory.Exists(currpath) || currpath.Equals(Directory.GetParent(copyobj[0].ToString()).Name)) return;
+            if (copyobj.Count == 0 || !Directory.Exists(currpath) || currpath.Equals(Directory.GetParent(copyobj[0].ToString()).Name)) return;
             for (int i = 0; i < copyobj.Count; i++)
             {
                 if (File.Exists(copyobj[i].ToString())) copycut_file(copyobj[i].ToString(), currpath);//文件
@@ -1184,7 +1192,7 @@ namespace wangtaomaoweihuan
         private void docut()
         {
             if (listView1.SelectedItems.Count == 0) return;
-            iscut = false;
+            iscut = true;
             copyobj.Clear();
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
                 copyobj.Add(listView1.SelectedItems[i].Tag.ToString());
@@ -1193,10 +1201,13 @@ namespace wangtaomaoweihuan
         private void docopy()
         {
             if (listView1.SelectedItems.Count == 0) return;
-            iscut = true;
+            iscut = false;
             copyobj.Clear();
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
-                copyobj.Add(listView1.SelectedItems[i].Tag.ToString());
+            {
+                 copyobj.Add(listView1.SelectedItems[i].Tag.ToString());
+                 //Console.WriteLine(listView1.SelectedItems[i].Tag.ToString());
+            }
         }
 
         private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -1287,7 +1298,7 @@ namespace wangtaomaoweihuan
                     {
                         if (flag_pre_next == false)
                         {
-                            accesspaths.Remove("点面");
+                            accesspaths.Remove("桌面");
                             accesspaths.Insert(0, "桌面");
                         }
 
@@ -1360,24 +1371,35 @@ namespace wangtaomaoweihuan
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             string currpath = combo_url.Text;
-
+            string t = "";
             switch (currpath)
             {
                 case "桌面":
                     return;
-                case "回收站": combo_url.Text = "回收站"; break;
-                case "我的电脑": combo_url.Text = "我的电脑"; break;
-                case "收藏夹": combo_url.Text = "收藏夹"; break;
+                case "回收站": combo_url.Text = "桌面"; break;
+                case "我的电脑": combo_url.Text = "桌面"; break;
+                case "收藏夹": combo_url.Text = "桌面"; break;
+                //case "C:\\":
+                //case "D:\\":
+                //case "E:\\":
+                //case "F:\\":
+                //case "G:\\":
+                //    combo_url.Text = "我的电脑";
+                //    break;
+            
                 default:
                     {
                         try
                         {
-                            combo_url.Text = Directory.GetParent(currpath).FullName;
-                        }
 
+                        }
                         catch
                         {
-                            combo_url.Text = "我的电脑";
+                            
+                        }
+                        finally
+                        {
+                           
                         }
                         break;
                     }
@@ -1414,11 +1436,11 @@ namespace wangtaomaoweihuan
                 case "item_newtxt": donew("txt"); break;//新建文本文档
                 case "item_newexcel": donew("excel"); break;//新建excel文档
                 case "item_newppt": donew("ppt"); break;//新建演示文稿
-                case "item_open": OpenObj(listView1.SelectedItems[0]); break;//打开文件夹或设备
-                case "item_del": doRecycleDel(); break;//回收站-删除(即彻底删除)
+                case "item_open": listView1_ItemActivate(sender, e); break;//打开文件夹或设备
+                case "item_del": doRecycleDel(); combo_url_SelectedIndexChanged(null, null); break;//回收站-删除(即彻底删除)
                 case "item_revert": doRevert(); break;//回收站-还原
                 case "item_empty": doEmpty(); break;//回收站-清空
-                case "iten_refresh2": combo_url_SelectedIndexChanged(null, null); break;//刷新
+                case "item_refresh2": combo_url_SelectedIndexChanged(null, null); break;//刷新
 
             }
 
@@ -1430,6 +1452,51 @@ namespace wangtaomaoweihuan
             if(folderpath.Equals("回收站")|| folderpath.Equals("收藏夹") || folderpath.Equals("我的电脑"))
                 listView1.ContextMenuStrip = contextMenu_lv2;
             else listView1.ContextMenuStrip = contextMenu_lv;
+        }
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            if (lb_searching.Text.Trim().Equals(""))
+            {
+                combo_url_SelectedIndexChanged(null, null);
+                return;
+            }
+            if (combo_url.Text.Equals("回收站"))
+            {
+                for (int i = listView1.Items.Count - 1; i >= 0; i--)
+                {
+                    string temp = listView1.Items[i].SubItems[0].Text.ToUpper();
+                    if (temp.IndexOf(lb_searching.Text.Trim().ToUpper()) == -1) listView1.Items.RemoveAt(i);
+                }
+            }
+            else
+            {
+                lb_searching.Visible = true;
+                lb_ojbnum.Text = "0";
+                statusStrip1.Refresh();//刷新显示，让正在搜索的文字得以显示
+                                       //this.Refresh();
+                listView1.Items.Clear();
+                CreateCol_R();
+                string topfolder = combo_url.Text;
+                if (topfolder.Equals("我的电脑"))
+                {
+                    DriveInfo[] drives = DriveInfo.GetDrives();
+                    foreach (DriveInfo drive in drives)
+                        if (drive.IsReady) doSearchFile(drive.Name, lb_searching.Text.Trim());
+                }
+                else if (topfolder.Equals("收藏夹"))
+                {
+                    doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), lb_searching.Text.Trim());
+                    doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), lb_searching.Text.Trim());
+                    doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), lb_searching.Text.Trim());
+                    doSearchFile(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), lb_searching.Text.Trim());
+                }
+                else
+                    doSearchFile(topfolder, lb_searching.Text.Trim());
+                
+
+            }
+            lb_ojbnum.Text = listView1.Items.Count.ToString();
+            lb_searching.Visible = true;
         }
     }
 

@@ -84,11 +84,11 @@
             this.item_refresh = new System.Windows.Forms.ToolStripMenuItem();
             this.item_attr = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu_lv2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.刷新ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.还原ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.item_open = new System.Windows.Forms.ToolStripMenuItem();
+            this.item_refresh2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.item_revert = new System.Windows.Forms.ToolStripMenuItem();
+            this.item_empty = new System.Windows.Forms.ToolStripMenuItem();
+            this.item_del = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -168,6 +168,7 @@
             this.btn_search.Size = new System.Drawing.Size(18, 20);
             this.btn_search.TabIndex = 1;
             this.btn_search.TabStop = false;
+            this.btn_search.DoubleClick += new System.EventHandler(this.btn_search_Click);
             // 
             // lb_searching
             // 
@@ -409,6 +410,7 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
             this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.MouseEnter += new System.EventHandler(this.listView1_MouseEnter);
@@ -458,41 +460,41 @@
             this.item_refresh,
             this.item_attr});
             this.contextMenu_lv.Name = "contextMenu_lv";
-            this.contextMenu_lv.Size = new System.Drawing.Size(211, 224);
+            this.contextMenu_lv.Size = new System.Drawing.Size(146, 196);
             this.contextMenu_lv.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_lv_Opening);
             // 
             // item_copy
             // 
             this.item_copy.Name = "item_copy";
-            this.item_copy.Size = new System.Drawing.Size(210, 24);
+            this.item_copy.Size = new System.Drawing.Size(145, 24);
             this.item_copy.Text = "复制(C)";
             this.item_copy.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_cut
             // 
             this.item_cut.Name = "item_cut";
-            this.item_cut.Size = new System.Drawing.Size(210, 24);
+            this.item_cut.Size = new System.Drawing.Size(145, 24);
             this.item_cut.Text = "剪切(X)";
             this.item_cut.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_paste
             // 
             this.item_paste.Name = "item_paste";
-            this.item_paste.Size = new System.Drawing.Size(210, 24);
+            this.item_paste.Size = new System.Drawing.Size(145, 24);
             this.item_paste.Text = "粘贴(V)";
             this.item_paste.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_delete
             // 
             this.item_delete.Name = "item_delete";
-            this.item_delete.Size = new System.Drawing.Size(210, 24);
+            this.item_delete.Size = new System.Drawing.Size(145, 24);
             this.item_delete.Text = "删除(DEL)";
             this.item_delete.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_rename
             // 
             this.item_rename.Name = "item_rename";
-            this.item_rename.Size = new System.Drawing.Size(210, 24);
+            this.item_rename.Size = new System.Drawing.Size(145, 24);
             this.item_rename.Text = "重命名";
             this.item_rename.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
@@ -505,55 +507,55 @@
             this.item_newexcel,
             this.item_newppt});
             this.item_new.Name = "item_new";
-            this.item_new.Size = new System.Drawing.Size(210, 24);
+            this.item_new.Size = new System.Drawing.Size(145, 24);
             this.item_new.Text = "新建";
             // 
             // item_newfolder
             // 
             this.item_newfolder.Name = "item_newfolder";
-            this.item_newfolder.Size = new System.Drawing.Size(216, 26);
+            this.item_newfolder.Size = new System.Drawing.Size(182, 26);
             this.item_newfolder.Text = "文件夹";
             this.item_newfolder.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newtxt
             // 
             this.item_newtxt.Name = "item_newtxt";
-            this.item_newtxt.Size = new System.Drawing.Size(216, 26);
+            this.item_newtxt.Size = new System.Drawing.Size(182, 26);
             this.item_newtxt.Text = "文本文档";
             this.item_newtxt.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newword
             // 
             this.item_newword.Name = "item_newword";
-            this.item_newword.Size = new System.Drawing.Size(216, 26);
+            this.item_newword.Size = new System.Drawing.Size(182, 26);
             this.item_newword.Text = "word文档";
             this.item_newword.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newexcel
             // 
             this.item_newexcel.Name = "item_newexcel";
-            this.item_newexcel.Size = new System.Drawing.Size(216, 26);
+            this.item_newexcel.Size = new System.Drawing.Size(182, 26);
             this.item_newexcel.Text = "excel电子表格";
             this.item_newexcel.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_newppt
             // 
             this.item_newppt.Name = "item_newppt";
-            this.item_newppt.Size = new System.Drawing.Size(216, 26);
+            this.item_newppt.Size = new System.Drawing.Size(182, 26);
             this.item_newppt.Text = "PPT演示文档";
             this.item_newppt.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_refresh
             // 
             this.item_refresh.Name = "item_refresh";
-            this.item_refresh.Size = new System.Drawing.Size(210, 24);
+            this.item_refresh.Size = new System.Drawing.Size(145, 24);
             this.item_refresh.Text = "刷新";
             this.item_refresh.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // item_attr
             // 
             this.item_attr.Name = "item_attr";
-            this.item_attr.Size = new System.Drawing.Size(210, 24);
+            this.item_attr.Size = new System.Drawing.Size(145, 24);
             this.item_attr.Text = "属性";
             this.item_attr.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
@@ -561,45 +563,49 @@
             // 
             this.contextMenu_lv2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenu_lv2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.打开ToolStripMenuItem,
-            this.刷新ToolStripMenuItem1,
-            this.还原ToolStripMenuItem,
-            this.清空ToolStripMenuItem,
-            this.删除ToolStripMenuItem1});
+            this.item_open,
+            this.item_refresh2,
+            this.item_revert,
+            this.item_empty,
+            this.item_del});
             this.contextMenu_lv2.Name = "contextMenu_lv2";
             this.contextMenu_lv2.Size = new System.Drawing.Size(109, 124);
             this.contextMenu_lv2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenu_lv2_Opening);
-            this.contextMenu_lv2.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
-            // 打开ToolStripMenuItem
+            // item_open
             // 
-            this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
-            this.打开ToolStripMenuItem.Text = "打开";
+            this.item_open.Name = "item_open";
+            this.item_open.Size = new System.Drawing.Size(108, 24);
+            this.item_open.Text = "打开";
+            this.item_open.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
-            // 刷新ToolStripMenuItem1
+            // item_refresh2
             // 
-            this.刷新ToolStripMenuItem1.Name = "刷新ToolStripMenuItem1";
-            this.刷新ToolStripMenuItem1.Size = new System.Drawing.Size(108, 24);
-            this.刷新ToolStripMenuItem1.Text = "刷新";
+            this.item_refresh2.Name = "item_refresh2";
+            this.item_refresh2.Size = new System.Drawing.Size(108, 24);
+            this.item_refresh2.Text = "刷新";
+            this.item_refresh2.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
-            // 还原ToolStripMenuItem
+            // item_revert
             // 
-            this.还原ToolStripMenuItem.Name = "还原ToolStripMenuItem";
-            this.还原ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
-            this.还原ToolStripMenuItem.Text = "还原";
+            this.item_revert.Name = "item_revert";
+            this.item_revert.Size = new System.Drawing.Size(108, 24);
+            this.item_revert.Text = "还原";
+            this.item_revert.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
-            // 清空ToolStripMenuItem
+            // item_empty
             // 
-            this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
-            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
-            this.清空ToolStripMenuItem.Text = "清空";
+            this.item_empty.Name = "item_empty";
+            this.item_empty.Size = new System.Drawing.Size(108, 24);
+            this.item_empty.Text = "清空";
+            this.item_empty.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
-            // 删除ToolStripMenuItem1
+            // item_del
             // 
-            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
-            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(108, 24);
-            this.删除ToolStripMenuItem1.Text = "删除";
+            this.item_del.Name = "item_del";
+            this.item_del.Size = new System.Drawing.Size(108, 24);
+            this.item_del.Text = "删除";
+            this.item_del.Click += new System.EventHandler(this.contextMenu_item_Click);
             // 
             // Form1
             // 
@@ -685,11 +691,11 @@
         private System.Windows.Forms.ToolStripMenuItem item_refresh;
         private System.Windows.Forms.ToolStripMenuItem item_attr;
         private System.Windows.Forms.ContextMenuStrip contextMenu_lv2;
-        private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 刷新ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 还原ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 清空ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem item_open;
+        private System.Windows.Forms.ToolStripMenuItem item_refresh2;
+        private System.Windows.Forms.ToolStripMenuItem item_revert;
+        private System.Windows.Forms.ToolStripMenuItem item_empty;
+        private System.Windows.Forms.ToolStripMenuItem item_del;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
