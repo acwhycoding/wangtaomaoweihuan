@@ -46,3 +46,5 @@ C:\Users\23683\Desktop\新建文件夹\wangtaomaoweihuan\wangtaomaoweihuan\obj\D
 C:\Users\23683\Desktop\新建文件夹\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.ResolveComReference.cache
 C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\Interop.Shell32.dll
 C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.ResolveComReference.cache
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\Interop.Shell32.dll
+C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.ResolveComReference.cache
