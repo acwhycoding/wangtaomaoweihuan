@@ -189,12 +189,13 @@ namespace wangtaomaoweihuan
         private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             TreeNode tn = treeView1.SelectedNode;
-            if (tn.Tag.Equals("mycomputer"))
+            Console.WriteLine(tn.Tag.ToString());
+            if (tn.Tag.ToString().Equals("mycomputer"))
             {
                 tn.Nodes.Clear();
                 GetDriverTree(tn);
             }
-            else if (!tn.Tag.Equals("favorites"))
+            else if (!tn.Tag.ToString().Equals("favorites"))
             {
                 tn.Nodes.Clear();
                 GetFolderTree(tn);
@@ -1233,6 +1234,8 @@ namespace wangtaomaoweihuan
 
         private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
+            string tmp, path;
+            path = tmp = combo_url.Text; 
             if (e.Label.Trim() == "" || e.Label.Trim().Equals(listView1.Items[e.Item].SubItems[0].Text.Trim()))
                 e.CancelEdit = true;
             else
@@ -1240,31 +1243,38 @@ namespace wangtaomaoweihuan
                 string newname = e.Label.Trim();
                 try
                 {
+                    switch (tmp)
+                    {
+                        case "桌面": path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); break;
+                        case "我的电脑": path = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer); break;
+                        case "我的文档": path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); break;
+                        default: path = combo_url.Text; break;
+                    }
                     if (File.Exists(listView1.Items[e.Item].Tag.ToString()))//如果是文件
                     {
-                        if (File.Exists(Path.Combine(combo_url.Text, newname)))//如果新文件名已经存在
+                        if (File.Exists(Path.Combine(path, newname)))//如果新文件名已经存在
                         {
                             MessageBox.Show("文件名已经存在，请重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             e.CancelEdit = true;
                         }
                         else
                         {
-                            File.Move(listView1.Items[e.Item].Tag.ToString(), Path.Combine(combo_url.Text, newname));
-                            listView1.Items[e.Item].Tag = Path.Combine(combo_url.Text, newname);
+                            File.Move(listView1.Items[e.Item].Tag.ToString(), Path.Combine(path, newname));
+                            listView1.Items[e.Item].Tag = Path.Combine(path, newname);
                         }
                     }
                     else
                         if (Directory.Exists(listView1.Items[e.Item].Tag.ToString()))//如果是文件夹
                     {
-                        if (Directory.Exists(Path.Combine(combo_url.Text, newname)))//如果新文件名已经存在
+                        if (Directory.Exists(Path.Combine(path, newname)))//如果新文件名已经存在
                         {
                             MessageBox.Show("文件夹已经存在，请重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             e.CancelEdit = true;
                         }
                         else
                         {
-                            Directory.Move(listView1.Items[e.Item].Tag.ToString(), Path.Combine(combo_url.Text, newname));
-                            listView1.Items[e.Item].Tag = Path.Combine(combo_url.Text, newname);
+                            Directory.Move(listView1.Items[e.Item].Tag.ToString(), Path.Combine(path, newname));
+                            listView1.Items[e.Item].Tag = Path.Combine(path, newname);
                         }
                     }
                 }
