@@ -376,6 +376,7 @@
             this.treeView1.ShowLines = false;
             this.treeView1.Size = new System.Drawing.Size(171, 358);
             this.treeView1.TabIndex = 0;
+            this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // listView1

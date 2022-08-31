@@ -188,14 +188,13 @@ namespace wangtaomaoweihuan
 
         private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            TreeNode tn = treeView1.SelectedNode;
-            Console.WriteLine(tn.Tag.ToString());
-            if (tn.Tag.ToString().Equals("mycomputer"))
+            TreeNode tn = e.Node;
+            if (tn.Tag.Equals("mycomputer"))
             {
                 tn.Nodes.Clear();
                 GetDriverTree(tn);
             }
-            else if (!tn.Tag.ToString().Equals("favorites"))
+            else if (!tn.Tag.Equals("favorites"))
             {
                 tn.Nodes.Clear();
                 GetFolderTree(tn);
