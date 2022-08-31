@@ -1371,40 +1371,41 @@ namespace wangtaomaoweihuan
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             string currpath = combo_url.Text;
-            string t = "";
+            //string t = "";
             switch (currpath)
             {
                 case "桌面":
-                    return;
+                    break;
                 case "回收站": combo_url.Text = "桌面"; break;
                 case "我的电脑": combo_url.Text = "桌面"; break;
                 case "收藏夹": combo_url.Text = "桌面"; break;
-                //case "C:\\":
-                //case "D:\\":
-                //case "E:\\":
-                //case "F:\\":
-                //case "G:\\":
-                //    combo_url.Text = "我的电脑";
-                //    break;
+                case "C:\\":
+                case "D:\\":
+                case "E:\\":
+                case "F:\\":
+                case "G:\\":
+                    combo_url.Text = "我的电脑";
+                    break;
             
                 default:
                     {
                         try
                         {
-
+                            combo_url.Text = Directory.GetParent(currpath).FullName;
                         }
                         catch
                         {
-                            
-                        }
-                        finally
-                        {
-                           
+                            combo_url.Text = "我的电脑";
                         }
                         break;
                     }
 
             }
+            combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
+            combo_url.DataSource = null;
+            combo_url.DataSource = accesspaths;
+            combo_url.SelectedIndex = 0;
+            combo_url.SelectedIndexChanged += new EventHandler(combo_url_SelectedIndexChanged);
             combo_url_SelectedIndexChanged(null, null);
 
         }
