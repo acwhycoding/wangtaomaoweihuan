@@ -48,3 +48,17 @@ C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\Interop.She
 C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.ResolveComReference.cache
 C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\Interop.Shell32.dll
 C:\Users\mwh\Desktop\新建文件夹 (3)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.ResolveComReference.cache
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.AssemblyReference.cache
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\Interop.Shell32.dll
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.ResolveComReference.cache
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.Form1.resources
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.Form2.resources
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.Properties.Resources.resources
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.GenerateResource.cache
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.CoreCompileInputs.cache
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.exe
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.pdb
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.exe.config
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.exe
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\bin\Debug\wangtaomaoweihuan.pdb
+C:\Users\23683\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.CopyComplete

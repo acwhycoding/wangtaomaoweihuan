@@ -1079,17 +1079,10 @@ namespace wangtaomaoweihuan
             }
         }
 
-        private void showattr(string v)
+        private void showattr(ListViewItem v)
         {
-            if(Directory.Exists(v))
-            {
-                DirectoryInfo dif = new DirectoryInfo(v);
-            }
-            if(File.Exists(v))
-            {
-               FileInfo dif = new FileInfo(v);
-            }
-            return;
+            Form2 form2 = new Form2(v);
+            form2.ShowDialog();
         }
 
         private void dorename()
@@ -1449,7 +1442,7 @@ namespace wangtaomaoweihuan
                 case "item_delete": dodelete(); break;//删除
                 case "item_rename": dorename(); break;//重命名
                 case "item_refresh": combo_url_SelectedIndexChanged(null, null); break; //刷新" +
-                case "item_attr": showattr(listView1.SelectedItems[0].Tag.ToString()); break;//属性
+                case "item_attr": showattr(listView1.SelectedItems[0]); break;//属性
                 case "item_newfolder": donew("folder"); break;//新建文件夹
                 case "item_newword": donew("word"); break;//新建word文档
                 case "item_newtxt": donew("txt"); break;//新建文本文档

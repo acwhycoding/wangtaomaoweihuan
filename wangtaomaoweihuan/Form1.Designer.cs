@@ -293,32 +293,32 @@
             // 大图标ToolStripMenuItem
             // 
             this.大图标ToolStripMenuItem.Name = "大图标ToolStripMenuItem";
-            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.大图标ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.大图标ToolStripMenuItem.Text = "大图标";
             // 
             // 小图标ToolStripMenuItem
             // 
             this.小图标ToolStripMenuItem.Name = "小图标ToolStripMenuItem";
-            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.小图标ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.小图标ToolStripMenuItem.Text = "小图标";
             // 
             // 列表ToolStripMenuItem
             // 
             this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
-            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.列表ToolStripMenuItem.Text = "列表";
             // 
             // 详细列表ToolStripMenuItem
             // 
             this.详细列表ToolStripMenuItem.Name = "详细列表ToolStripMenuItem";
-            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.详细列表ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.详细列表ToolStripMenuItem.Text = "详细列表";
             this.详细列表ToolStripMenuItem.Click += new System.EventHandler(this.详细列表ToolStripMenuItem_Click);
             // 
             // 详细大图标ToolStripMenuItem
             // 
             this.详细大图标ToolStripMenuItem.Name = "详细大图标ToolStripMenuItem";
-            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.详细大图标ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.详细大图标ToolStripMenuItem.Text = "详细大图标";
             // 
             // statusStrip1

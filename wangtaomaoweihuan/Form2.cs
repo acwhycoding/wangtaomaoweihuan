@@ -12,9 +12,20 @@ namespace wangtaomaoweihuan
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        ListViewItem p;
+        public Form2(ListViewItem v)
         {
             InitializeComponent();
+            this.p = v;
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            item_name.Text = p.Text;
+            item_type.Text = p.SubItems[1].Text;
+            item_ctime.Text = p.SubItems[4].Text;
+            item_mname.Text = p.SubItems[2].Text;
+            item_size.Text = p.SubItems[3].Text;
         }
     }
 }
