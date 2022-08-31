@@ -184,6 +184,8 @@ namespace wangtaomaoweihuan
             }
             lb_ojbnum.Text = listView1.Items.Count.ToString();
         }
+
+
         private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
             TreeNode tn = treeView1.SelectedNode;
@@ -393,7 +395,7 @@ namespace wangtaomaoweihuan
                     {
                         if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
                         accesspaths.Insert(0, "回收站");
-                        GetRecyleListView();
+                        GetRecycleListView();
                         break;
                     }
                 case "收藏夹":
@@ -545,8 +547,13 @@ namespace wangtaomaoweihuan
 
         }
 
-        private void GetRecyleListView()
+        private void GetRecycleListView()
         {
+            List<string> tmp = new List<string>();
+            foreach(ListViewItem it in listView1.SelectedItems)
+            {
+                tmp.Add(it.Tag.ToString());
+            }
             listView1.Items.Clear();
             CreateCol_R();
             Shell shell = new Shell();//引用C:windows system32 shell32.dll，命名空间Shell32
@@ -556,6 +563,7 @@ namespace wangtaomaoweihuan
                 ListViewItem lv = new ListViewItem(f.Name);
                 lv.Tag = f.Path;// 路径
                 lv.IndentCount = 1;
+                
                 if (f.IsFolder)// 文件夹
                 {
                     lv.ImageKey = "defaultfolder";
@@ -567,6 +575,11 @@ namespace wangtaomaoweihuan
                 lv.SubItems.Add(f.Type);
                 lv.SubItems.Add(f.Path);
                 lv.SubItems.Add(f.ModifyDate.ToString());
+                if (tmp.Contains(lv.Tag.ToString()))
+                {
+                    f.Verbs().Item(0).DoIt();
+                    continue;
+                }
                 listView1.Items.Add(lv);
                 lb_ojbnum.Text = listView1.Items.Count.ToString();
             }
@@ -695,6 +708,7 @@ namespace wangtaomaoweihuan
                 }
             }
             catch { }
+
             lb_ojbnum.Text = listView1.Items.Count.ToString();
 
         }
@@ -742,7 +756,7 @@ namespace wangtaomaoweihuan
                 }
                 else imgkey = "unknowicon";
             }
-            Console.WriteLine(imgkey);
+            //Console.WriteLine(imgkey);
             return imgkey;
         }
 
@@ -757,7 +771,7 @@ namespace wangtaomaoweihuan
             string fullname = fitem.Tag.ToString();
             string urltext = combo_url.Text;
             string mytype = fitem.SubItems[1].Text;
-            Console.WriteLine(urltext);
+            //Console.WriteLine(urltext);
             if (urltext.Equals("我的电脑"))
             {
                 DriveInfo driveInfo = new DriveInfo(fullname);
@@ -810,7 +824,7 @@ namespace wangtaomaoweihuan
                     {
                         if (accesspaths.IndexOf("回收站") > -1) accesspaths.Remove("回收站");
                         accesspaths.Insert(0, "回收站");
-                        GetRecyleListView();
+                        GetRecycleListView();
 
                         combo_url.SelectedIndexChanged -= new EventHandler(combo_url_SelectedIndexChanged);
                         combo_url.DataSource = null;
@@ -972,7 +986,8 @@ namespace wangtaomaoweihuan
 
         private void doRevert()
         {
-            throw new NotImplementedException();
+            GetRecycleListView();
+            combo_url_SelectedIndexChanged(null, null);
         }
 
         private void doRecycleDel()
@@ -983,6 +998,7 @@ namespace wangtaomaoweihuan
                 for (int i = 0; i < listView1.SelectedItems.Count; i++)
                 {
                     string fullname = listView1.SelectedItems[i].Tag.ToString();
+                    Console.WriteLine(fullname);
                     if (File.Exists(fullname))
                     {
                         FileSystem.DeleteFile(fullname, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
@@ -1095,9 +1111,11 @@ namespace wangtaomaoweihuan
                 for (int i = 0; i < listView1.SelectedItems.Count; i++)
                 {
                     string fullname = listView1.SelectedItems[i].Tag.ToString();
+                    //Console.WriteLine(fullname);
                     if (File.Exists(fullname))
                     {
-                        FileSystem.DeleteFile(fullname, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                        FileSystem.DeleteFile(@fullname, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                       
                     }
                     else
                         if (Directory.Exists(fullname))
@@ -1113,7 +1131,7 @@ namespace wangtaomaoweihuan
         {
             string currpath = combo_url.Text;
             if (currpath.Equals("桌面")) currpath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            Console.WriteLine(copyobj.Count);
+            //Console.WriteLine(copyobj.Count);
             //如果复制对象数为0，或目录不存在，或源目录和目的目录相同，则返回
             if (copyobj.Count == 0 || !Directory.Exists(currpath) || currpath.Equals(Directory.GetParent(copyobj[0].ToString()).Name)) return;
             for (int i = 0; i < copyobj.Count; i++)
@@ -1323,7 +1341,7 @@ namespace wangtaomaoweihuan
                             accesspaths.Insert(0, "回收站");
                         }
 
-                        GetRecyleListView(); break;
+                        GetRecycleListView(); break;
                     }
 
                 case "收藏夹":
@@ -1498,6 +1516,53 @@ namespace wangtaomaoweihuan
             }
             lb_ojbnum.Text = listView1.Items.Count.ToString();
             lb_searching.Visible = true;
+        }
+      
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (listView1.Columns[e.Column].Tag == null)
+            {
+                listView1.Columns[e.Column].Tag = true;
+            }
+            bool tabK = (bool)listView1.Columns[e.Column].Tag;
+            if (tabK)
+            {
+                listView1.Columns[e.Column].Tag = false;
+            }
+            else
+            {
+                listView1.Columns[e.Column].Tag = true;
+            }
+            listView1.ListViewItemSorter = new ListViewSort(e.Column, listView1.Columns[e.Column].Tag);
+            // 指定排序器并传送列索引与升序降序关键字
+            listView1.Sort();
+        }
+        public class ListViewSort : IComparer
+        {
+            private int col;
+            private bool descK;
+
+            public ListViewSort()
+            {
+                col = 0;
+            }
+            public ListViewSort(int column, object Desc)
+            {
+                descK = (bool)Desc;
+                col = column;  // 当前列,0,1,2...,参数由ListView控件的ColumnClick事件传递
+            }
+            public int Compare(object x, object y)
+            {
+                int tempInt = String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                if (descK)
+                {
+                    return -tempInt;
+                }
+                else
+                {
+                    return tempInt;
+                }
+            }
         }
     }
 
