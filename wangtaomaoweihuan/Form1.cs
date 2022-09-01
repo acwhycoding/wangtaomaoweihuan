@@ -1499,6 +1499,8 @@ namespace wangtaomaoweihuan
             // 指定排序器并传送列索引与升序降序关键字
             listView1.Sort();
         }
+
+        
         public class ListViewSort : IComparer
         {
             private int col;
@@ -1513,9 +1515,95 @@ namespace wangtaomaoweihuan
                 descK = (bool)Desc;
                 col = column;  // 当前列,0,1,2...,参数由ListView控件的ColumnClick事件传递
             }
+            public bool IsDate(string strDate)
+            {
+                try
+                {
+                    DateTime.Parse(strDate);
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            public bool IsSize(string s)
+            {
+                int f = 0;
+                if (s.Contains("Byte"))
+                {
+                    s=s.Replace("Byte", "");
+                    f = 1;
+                }
+                else if (s.Contains("KB"))
+                {
+                    s = s.Replace("KB", "");
+                    f = 1;
+                }
+                else if (s.Contains("MB"))
+                {
+                    s = s.Replace("MB", "");
+                    f = 1;
+                }
+                else if (s.Contains("G"))
+                {
+                    s = s.Replace("G", "");
+                    f = 1;
+                }
+                //Console.WriteLine(s);
+                if (double.TryParse(s,out double t) == true)
+                {
+                    if (f == 1) return true;
+                }
+                return false;
+            }
+            public double rechange(string s)
+            {
+                double f = 1;
+                if (s.Contains("Byte"))
+                {
+                    s = s.Replace("Byte", "");
+                    f = 1;
+                }
+                else if (s.Contains("KB"))
+                {
+                    s = s.Replace("KB", "");
+                    f = 1024;
+                }
+                else if (s.Contains("MB"))
+                {
+                    s = s.Replace("MB", "");
+                    f = 1024*1024;
+                }
+                else if (s.Contains("G"))
+                {
+                    s = s.Replace("G", "");
+                    f = 1024*1024*1024;
+                }
+                double t;
+                if (double.TryParse(s, out t) == true)
+                {
+                    return t * f;
+                }
+                return 0;
+            }
             public int Compare(object x, object y)
             {
                 int tempInt = String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                if (IsDate(((ListViewItem)x).SubItems[col].Text))
+                {
+                    DateTime dtDate1,dtDate2;
+                    DateTime.TryParse(((ListViewItem)x).SubItems[col].Text, out dtDate1);
+                    DateTime.TryParse(((ListViewItem)y).SubItems[col].Text, out dtDate2);
+                    tempInt = DateTime.Compare(dtDate1,dtDate2);
+                }
+                else if (IsSize(((ListViewItem)x).SubItems[col].Text) && IsSize(((ListViewItem)y).SubItems[col].Text))
+                {
+                    double t1, t2;
+                    t1 = rechange(((ListViewItem)x).SubItems[col].Text);
+                    t2 = rechange(((ListViewItem)y).SubItems[col].Text);
+                    tempInt = t1.CompareTo(t2);
+                }
                 if (descK)
                 {
                     return -tempInt;

@@ -91,3 +91,5 @@ C:\Users\mwh\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj
 C:\Users\mwh\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.CopyComplete
 C:\Users\mwh\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.exe
 C:\Users\mwh\Desktop\新建文件夹 (2)\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.pdb
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.csproj.AssemblyReference.cache
+C:\Users\23683\Desktop\wangtaomaoweihuan\wangtaomaoweihuan\obj\Debug\wangtaomaoweihuan.Form2.resources
